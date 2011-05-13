@@ -1,0 +1,27 @@
+{
+  "name": "__MSG_extName__",
+  "description": "__MSG_extDescription__",
+  "version": "0.20",
+  "default_locale": "en",
+  
+  "background_page": "views/background.html",
+  
+  "icons": {
+    "128": "images/icon128.png",
+    "16": "images/icon16.png",
+    "48": "images/icon48.png"
+  },
+  
+  "page_action": {
+    "default_icon": "images/icon48.png",
+    "default_title": "__MSG_pageActionTitle__"
+  },
+  
+  "permissions": [ 
+    "tabs",
+    "http://google.com/search*",
+    "http://www.google.com/search*",
+    "http://www.youtube.com/watch*", 
+    "http://www.azlyrics.com/lyrics/*"
+  ]
+}

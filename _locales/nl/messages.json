@@ -1,0 +1,46 @@
+{
+  "extName": {
+    "message": "Lyrics voor YouTube\u2122",
+    "description": "Title of the plugin"
+  },
+  
+  "extDescription": {
+    "message": "Lees de tekst van elk liedje op YouTube\u2122.",
+    "description": "Description of the plugin"
+  },
+  
+  "pageActionTitle": {
+    "message": "Lyrics erbij zoeken",
+    "description": "Text in small popup when you hover the page action icon"
+  },
+  
+  "loadingMessage": {
+    "message": "Lyrics opzoeken...",
+    "description": "Message when a lyrics is loading"
+  },
+  
+  "copyrightInfo": {
+    "message": "Op de lyrics rust een copyright",
+    "description": "First line of the copyright text after the lyrics"
+  },
+  
+  "copyrightCourtesy": {
+    "message": "Lyrics zijn eigendom van <a href=\"http://www.azlyrics.com\">azlyrics.com</a>",
+    "description": "Second line of the copyright with a link to azlyrics"
+  },
+  
+  "notFound": {
+    "message": "Geen lyrics gevonden.",
+    "description": "Message shown when no lyrics was found"
+  },
+  
+  "notFoundHelp": {
+    "message": "Probeer de titel en artiest handmatig in te vullen (bijv. \"Born this way - Lady Gaga\") en druk op enter: ",
+    "description": "Show a hint when no lyrics were found"
+  },
+  
+  "removeLyrics": {
+    "message": "Haal lyrics weg",
+    "description": "The remove from page text"
+  }
+}

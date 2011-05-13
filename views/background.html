@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../javascripts/zepto.min.js"></script>
+    <script>
+      // Check if the version has changed.
+      var currVersion = getVersion(),
+          prevVersion = localStorage['version'];
+          
+      if (currVersion !== prevVersion) {
+        // Check if we just installed this extension.
+        if (typeof prevVersion === 'undefined') {
+          onInstall();
+        } else {
+          onUpdate();
+        }
+        
+        localStorage['version'] = currVersion;
+      }
+      
+      function filterTitle(title){
+        return title.replace( '-', ' ' )
+                 .replace( /official video/i, '' )
+                 .replace( /official music video/i, '' )
+                 .replace( /best quality/i, '' )
+                 .replace( /high quality/i, '' )
+      }
+      
+      function onRequest( request, sender, callback ) {
+        if ( request.action == 'getLyrics' ) {
+          
+          //Do some filtering if this is the first try to find the lyrics
+          if ( request.requeue == false ){
+            request.title = filterTitle(request.title);
+          }
+          
+          $.get('http://google.com/search?sourceid=navclient&btnI=1&q=site%3Aazlyrics.com+' + encodeURIComponent( request.title ), function(data, status){
+            if(status === 'success'){
+              var pos1 = data.indexOf('<!-- start of lyrics -->') + 26,
+                  pos2 = data.indexOf('<!-- end of lyrics -->'),
+                  lyrics = data.substr(pos1, pos2 - pos1);
+              
+              if(lyrics.length > 0){
+              
+                // Send lyrics back
+                callback({
+                  lyrics: lyrics,
+                  success: true
+                });
+              } else {
+              
+                // No lyrics found
+                callback({
+                  success: false
+                });
+              }
+            } else {
+              
+              // Error in request
+              callback({
+                success: false
+              });
+            }
+          });
+        }
+      };
+
+      // Called when the url of a tab changes.
+      function checkForValidUrl(tabId, changeInfo, tab) {
+        var url = tab.url;
+        
+        // If the user is watching a video on YouTube
+        if (url.toLowerCase().substring( 0, 28 ) == 'http://www.youtube.com/watch') {
+          // ... show the page action.
+          chrome.pageAction.show(tabId);
+        }
+      };
+
+      // Listen for any changes to the URL of any tab.
+      chrome.tabs.onUpdated.addListener(checkForValidUrl);
+      
+      //Listen for any requests
+      chrome.extension.onRequest.addListener(onRequest);
+      
+      //Listen for clicks on the page action
+      chrome.pageAction.onClicked.addListener(function( tab ) {
+        chrome.tabs.executeScript(tab.id, { file: 'javascripts/zepto.min.js' });
+        chrome.tabs.executeScript(tab.id, { file: 'javascripts/script.js' });
+        chrome.tabs.insertCSS(tab.id, {file: 'css/yt_lyrics.css'});
+      });
+      
+      function onInstall() {
+        
+      }
+
+      function onUpdate() {
+        
+      }
+      
+      function getVersion() {
+        var manifest, xhr = new XMLHttpRequest();
+            
+        xhr.open('GET', chrome.extension.getURL('manifest.json'), false);
+        xhr.send(null);
+        manifest = JSON.parse(xhr.responseText);
+        return manifest.version;
+      }
+    </script>
+  </head>
+</html>
