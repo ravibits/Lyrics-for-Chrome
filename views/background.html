@@ -18,21 +18,8 @@
         localStorage['version'] = currVersion;
       }
       
-      function filterTitle(title){
-        return title.replace( '-', ' ' )
-                 .replace( /official video/i, '' )
-                 .replace( /official music video/i, '' )
-                 .replace( /best quality/i, '' )
-                 .replace( /high quality/i, '' )
-      }
-      
       function onRequest( request, sender, callback ) {
         if ( request.action == 'getLyrics' ) {
-          
-          //Do some filtering if this is the first try to find the lyrics
-          if ( request.requeue == false ){
-            request.title = filterTitle(request.title);
-          }
           
           $.get('http://google.com/search?sourceid=navclient&btnI=1&q=site%3Aazlyrics.com+' + encodeURIComponent( request.title ), function(data, status){
             if(status === 'success'){
@@ -70,7 +57,7 @@
         var url = tab.url;
         
         // If the user is watching a video on YouTube
-        if (url.toLowerCase().substring( 0, 28 ) == 'http://www.youtube.com/watch') {
+        if(url.toLowerCase().substring( 0, 28 ) == 'http://www.youtube.com/watch') {
           // ... show the page action.
           chrome.pageAction.show(tabId);
         }

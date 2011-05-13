@@ -1,15 +1,15 @@
-#ytl_lyrics {
+#ytl-lyrics {
   min-height: 15px;
   max-height: 426px;
   overflow-y: auto;
   -webkit-transition: height .3s ease-out;
 }
 
-#ytl_remove_lyrics {
+#ytl-remove_lyrics {
   float: right;
   margin: 6px 3px 0 0;
 }
 
-#ytl_lyrics input[type=text] {
+#ytl-lyrics input[type=text] {
   width: 98%;
 }

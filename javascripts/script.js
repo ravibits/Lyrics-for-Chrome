@@ -1,5 +1,34 @@
-var YoutubeLyrics = (function(){
-  var title, lyricsWrapper, lyricsContent;
+var YouTubeLyrics = (function(){
+  var currentLyrics = {
+    _title: "",
+    filter: true
+  };
+
+  var elements = {
+    lyricsWrapper: null, 
+    lyricsContent: null
+  };
+  
+  /**
+   * Removes additional info like "(video)" and "(original)" at the end of the YouTube title
+   */
+  function filterTitle(t){
+    return t.replace(/( \(.+\))+$/, '');
+  }
+  
+  /**
+   * A getter for the title
+   */
+  currentLyrics.__defineGetter__('title', function(){
+    return this._title;
+  });
+  
+  /**
+   * A setter for the title, which automatically filters the title if set so
+   */
+  currentLyrics.__defineSetter__('title', function(val){
+    this._title = (this.filter ? filterTitle(val) : val);
+  });
   
   /**
    * This function sets the height of an element
@@ -26,8 +55,8 @@ var YoutubeLyrics = (function(){
    */
   function showLyrics(lyrics){
     // Show the lyrics
-    lyricsContent.html([lyrics, '<br/><br/>', chrome.i18n.getMessage("copyrightInfo"), '<br/>', chrome.i18n.getMessage("copyrightCourtesy")].join(''));
-    animateHeight(lyricsContent, 426);
+    elements.lyricsContent.html([lyrics, '<br/><br/>', chrome.i18n.getMessage("copyrightInfo"), '<br/>', chrome.i18n.getMessage("copyrightCourtesy")].join(''));
+    animateHeight(elements.lyricsContent, 426);
   }
   
   /**
@@ -40,9 +69,9 @@ var YoutubeLyrics = (function(){
     // Creates a search field for searching manually
     requeryInput = $('<input autofocus/>').attr({
       'type': 'text',
-      'id': 'ytl_search_lyrics',
-      'name': 'ytl_search_lyrics',
-      'value': title.replace('"', '')
+      'id': 'ytl-search-lyrics',
+      'name': 'ytl-search-lyrics',
+      'value': currentLyrics.title
     });
     
     // Creates a form for searching manually
@@ -66,15 +95,15 @@ var YoutubeLyrics = (function(){
         e.preventDefault();
         
         // Set the title and try to get the lyrics again
-        title = requeryInput.val();
-        queryLyrics(true);
+        currentLyrics.title = requeryInput.val();
+        queryLyrics();
       });
     
     // Replace the content of the lyrics <div> with the form
-    lyricsContent.html('').prepend(requeryForm);
+    elements.lyricsContent.html('').prepend(requeryForm);
     
     // Animate the height of the lyrics div
-    animateHeight(lyricsContent, 426);
+    animateHeight(elements.lyricsContent, 426);
   }
   
   /**
@@ -84,8 +113,15 @@ var YoutubeLyrics = (function(){
   function lyricsCallback(data) {
 
     if (data.success) {
+      
+      // We've found the lyrics successfully, so show it
       showLyrics(data.lyrics);
     } else {
+    
+      // No lyrics found
+      // Make sure that the next lyrics will be searched manually
+      // so no filters are applied
+      currentLyrics.filter = false;
       showSearchForm();
     }
   }
@@ -93,54 +129,53 @@ var YoutubeLyrics = (function(){
   /**
    * Get the lyrics for the current song
    */
-  function queryLyrics(requeue) {
+  function queryLyrics() {
     //Display loading message
-    lyricsContent.html(chrome.i18n.getMessage("loadingMessage"));
+    elements.lyricsContent.html(chrome.i18n.getMessage("loadingMessage"));
 
     //Fetch and display the lyrics
     chrome.extension.sendRequest({
       'action': 'getLyrics',
-      'title': title,
-      'requeue': requeue
+      'title': currentLyrics.title
     }, lyricsCallback);
   }
   
   /**
-   * Initialize the lyricsplugin on the Youtube page
+   * Initialize the lyricsplugin on the YouTube page
    */
   function init(){
     var removeImage;
     
     // Try to get the lyrics wrapper
-    lyricsWrapper = $('#ytl_sb_section');
+    elements.lyricsWrapper = $('#ytl-sb-section');
     
-    // Remove the <div> if Youtube Lyrics had already been added to the page
-    if(lyricsWrapper.length === 1){
-      lyricsWrapper.remove();
+    // Remove the <div> if YouTube Lyrics had already been added to the page
+    if(elements.lyricsWrapper.length === 1){
+      elements.lyricsWrapper.remove();
       return;
     }
   
-    // Get the video's title
-    title = $('#watch-headline-title').text();
+    // Set the video's title
+    currentLyrics.title = $('#watch-headline-title').text();
     
     // Create a remove from page button (Youtube style)
     removeImage = $('<img/>').attr({
       'src': '//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif',
-      'id': 'ytl_remove_lyrics',
+      'id': 'ytl-remove-lyrics',
       'class': 'master-sprite img-php-close-button',
       'alt': chrome.i18n.getMessage('removeLyrics'),
       'title': chrome.i18n.getMessage('removeLyrics')
     });
     
     // Create a div that holds the lyrics
-    lyricsWrapper = 
-      $('<div id="ytl_sb_section" class="watch-module"/>')
+    elements.lyricsWrapper = 
+      $('<div id="ytl-sb-section" class="watch-module"/>')
         .append(
           $('<div class="watch-module-body"/>')
             .html(
               [
                 '<h4 class="first">Lyrics</h4>',
-                '<div id="ytl_lyrics" class="ytl_scrollbar_enabled">',
+                '<div id="ytl-lyrics" class="ytl-scrollbar-enabled">',
                   chrome.i18n.getMessage('loadingMessage'),
                 '</div>'
               ].join('')
@@ -149,21 +184,21 @@ var YoutubeLyrics = (function(){
         );
     
     // Add it to the side bar
-    $('#watch-sidebar').prepend(lyricsWrapper);
+    $('#watch-sidebar').prepend(elements.lyricsWrapper);
     
     // Set the click event for removing the lyrics from the page
     removeImage.bind('click', function(){
-      lyricsWrapper.remove();
+      elements.lyricsWrapper.remove();
     });
     
     // Get the lyrics content <div>
-    lyricsContent = $('#ytl_lyrics');
+    elements.lyricsContent = $('#ytl-lyrics');
     
     // Set the height of the div
-    animateHeight(lyricsContent, 426);
+    animateHeight(elements.lyricsContent, 426);
 
     // Fetch and display the lyrics
-    queryLyrics(false);
+    queryLyrics();
   }
   
   return {
@@ -172,4 +207,4 @@ var YoutubeLyrics = (function(){
   
 })();
 
-YoutubeLyrics.init();
+YouTubeLyrics.init();
