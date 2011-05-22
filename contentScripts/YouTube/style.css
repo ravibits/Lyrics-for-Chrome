@@ -1,4 +1,4 @@
-#ytl-lyrics {
+#ytl-innerwrapper {
   min-height: 15px;
   max-height: 426px;
   overflow-y: auto;
@@ -10,6 +10,6 @@
   margin: 6px 3px 0 0;
 }
 
-#ytl-lyrics input[type=text] {
+#ytl-search-lyrics {
   width: 98%;
 }
