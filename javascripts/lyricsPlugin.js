@@ -136,19 +136,38 @@ LyricsPlugin.prototype.queryLyrics = function() {
 
 /**
  * Initialize the lyricsplugin on the page
+ * This is overriden by a website specific script
  */
 LyricsPlugin.prototype.init = function(){};
 
 /**
  * Show lyrics and copyright info on the page
  */
-LyricsPlugin.prototype.showLyrics = function(){};
+LyricsPlugin.prototype.showLyrics = function(lyrics){
+  // Hide all content
+  this.hideSections();
+  
+  // Insert the lyrics
+  this.elements.lyricsContent.html([lyrics, '<br/><br/>', chrome.i18n.getMessage("copyrightInfo"), '<br/>', chrome.i18n.getMessage("copyrightCourtesy")].join(''));
+  
+  this.showSection('lyricsContent');
+};
 
 /**
  * Places a search form in the lyrics div
  * to search manually for lyrics
  */
-LyricsPlugin.prototype.showSearchForm = function(){};
+LyricsPlugin.prototype.showSearchForm = function(){
+
+  // Hide everything
+  this.hideSections();
+  
+  // Show the search form
+  this.showSection('searchForm');
+  
+  // Set the focus on the search input field
+  this.elements.searchInput.get(0).focus();
+};
 
 /**
  * Removes additional info like "(video)" and "(original)" at the end of the song title

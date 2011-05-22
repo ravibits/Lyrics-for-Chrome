@@ -22,6 +22,16 @@
         "contentScripts/YouTube/script.js", 
         "javascripts/contentScriptExecuter.js"
       ]
+    },
+    {
+      "matches": ["http://www.last.fm/music/*/_/*"],
+      "css": ["contentScripts/Last.fm/style.css"],
+      "js": [
+        "javascripts/zepto.min.js",
+        "javascripts/LyricsPlugin.js",
+        "contentScripts/Last.fm/script.js", 
+        "javascripts/contentScriptExecuter.js"
+      ]
     }
   ],
   

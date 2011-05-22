@@ -1,26 +1,3 @@
-LyricsPlugin.prototype.showLyrics = function(lyrics){
-  // Hide all content
-  this.hideSections();
-  
-  // Insert the lyrics
-  this.elements.lyricsContent.html([lyrics, '<br/><br/>', chrome.i18n.getMessage("copyrightInfo"), '<br/>', chrome.i18n.getMessage("copyrightCourtesy")].join(''));
-  
-  this.showSection('lyricsContent');
-};
-
-
-LyricsPlugin.prototype.showSearchForm = function(){
-
-  // Hide everything
-  this.hideSections();
-  
-  // Show the search form
-  this.showSection('searchForm');
-  
-  // Set the focus on the search input field
-  this.elements.searchInput.get(0).focus();
-};
-
 LyricsPlugin.prototype.init = function(){
   var html, $html, that = this;
 
