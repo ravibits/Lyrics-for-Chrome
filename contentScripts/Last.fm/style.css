@@ -1,0 +1,12 @@
+#lfc-innerwrapper {
+  min-height: 15px;
+  max-height: 426px;
+  overflow-y: auto;
+  -webkit-transition: height .3s ease-out;
+}
+
+#lfc-remove-lyrics {
+  float: right;
+  cursor: pointer;
+  padding-right: 1px;
+}

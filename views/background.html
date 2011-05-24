@@ -1,0 +1,109 @@
+<script src="../javascripts/zepto.min.js"></script>
+<script>
+  
+  function getLyrics(title, callback) {
+    var startPos, endPos, lyrics;
+    
+    $.get('http://google.com/search?sourceid=navclient&btnI=1&q=site%3Aazlyrics.com+' + encodeURIComponent(title), function(data, status){
+      try {
+      
+        // Check if XHR completed succesfully
+        if(status !== 'success'){
+          throw('Could not connect with azlyrics');
+        }
+        
+        startPos = data.indexOf('<!-- start of lyrics -->') + 26,
+        endPos = data.indexOf('<!-- end of lyrics -->'),
+        lyrics = data.substr(startPos, endPos - startPos);
+        
+        if(lyrics.length === 0){
+          throw('No lyrics found');
+        }
+        
+        // Send lyrics back
+        callback({
+          success: true,
+          lyrics: lyrics
+        });
+      } catch(err) {
+      
+        // Error in request
+        callback({
+          success: false,
+          errorMsg: err
+        });            
+      }
+    });
+  }
+  
+  chrome.extension.onRequest.addListener(function(request, sender, callback) {
+    switch(request.action){
+      case 'getLyrics':
+        getLyrics(request.title, callback);
+      break;
+      case 'showPageActionIcon':
+        chrome.pageAction.show(sender.tab.id);
+      break;
+    }
+  });
+  
+  function onInstall() {
+  
+  }
+
+  function onUpdate() {
+  
+  }
+  
+  function getVersion() {
+    var manifest, xhr = new XMLHttpRequest();
+        
+    xhr.open('GET', chrome.extension.getURL('manifest.json'), false);
+    xhr.send(null);
+    manifest = JSON.parse(xhr.responseText);
+    return manifest.version;
+  }
+  
+  // Send a message to the tab if the page action was clicked
+  chrome.pageAction.onClicked.addListener(function(tab){
+  
+    if(localStorage['showLyricsType'] == 'onPage'){
+    
+      // Show the lyrics on the current tab itself
+      chrome.tabs.sendRequest(tab.id, {action: 'showLyricsOnPage'});
+    } else {
+    
+      // Create a new tab for the lyrics
+      chrome.tabs.sendRequest(tab.id, {action: 'getLyricsTitle'}, function(data){
+        chrome.tabs.create({
+          index: tab.index+1, 
+          url: chrome.extension.getURL('../contentScripts/newTab/index.html')
+        }, function(newTab){
+          chrome.tabs.sendRequest(newTab.id, {
+            title: data.title,
+            action: 'initNewTab'
+          });
+        });
+      });
+    }
+  });
+  
+  // Check if the extension has been updated
+  var currVersion = getVersion(),
+      prevVersion = localStorage['version'];
+      
+  if (currVersion !== prevVersion) {
+    if (typeof prevVersion === 'undefined') {
+      onInstall();
+    } else {
+      onUpdate();
+    }
+    
+    localStorage['version'] = currVersion;
+  }
+  
+  // Check if is set whether the lyrics should show up on the page or in a new tab
+  if(typeof localStorage['showLyricsType'] === 'undefined'){
+    localStorage['showLyricsType'] = 'onPage';
+  }
+</script>
