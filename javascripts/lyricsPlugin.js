@@ -53,7 +53,7 @@ LyricsPlugin.prototype.showSection = function(section){
   this.elements[section].show();
   
   // Animate the height of the content div
-  this.animateHeight(this.elements.innerWrapper, this.elements[section].height(), 426);
+  this.animateHeight(this.elements.innerWrapper, this.elements[section].height());
 };
 
 /**
@@ -62,7 +62,7 @@ LyricsPlugin.prototype.showSection = function(section){
 LyricsPlugin.prototype.hide = function(){
   this.hideSections();
   this.elements.outerWrapper.hide();
-  this.animateHeight(this.elements.innerWrapper, 0, 426);
+  this.animateHeight(this.elements.innerWrapper, 0);
   this.isVisible = false;
 };
 
@@ -141,6 +141,12 @@ LyricsPlugin.prototype.queryLyrics = function() {
 LyricsPlugin.prototype.init = function(){};
 
 /**
+ * Get the song title from the page
+ * This is overriden by a website specific script
+ */
+LyricsPlugin.prototype.getTitleFromPage = function(){};
+
+/**
  * Show lyrics and copyright info on the page
  */
 LyricsPlugin.prototype.showLyrics = function(lyrics){
@@ -181,8 +187,10 @@ LyricsPlugin.prototype.filterTitle = function(t){
 
 /**
  * This function sets the height of an element
- * but the height will not exceed the maximum value
+ * but the height will not exceed the maximum value if set so
  */
-LyricsPlugin.prototype.animateHeight = function(el, currentHeight, max){
-  el.css('height', (currentHeight > max ? max : currentHeight) + 'px');
+LyricsPlugin.prototype.animateHeight = function(el, currentHeight){
+  var height = (this.hasMaxHeight && currentHeight > this.maxHeight) ? this.maxHeight : currentHeight;
+  
+  el.css('height', height + 'px');
 };

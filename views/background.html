@@ -66,15 +66,33 @@
   
   // Send a message to the tab if the page action was clicked
   chrome.pageAction.onClicked.addListener(function(tab){
-    chrome.tabs.sendRequest(tab.id, {action: 'onPageActionClicked'});
+  
+    if(localStorage['showLyricsType'] == 'onPage'){
+    
+      // Show the lyrics on the current tab itself
+      chrome.tabs.sendRequest(tab.id, {action: 'showLyricsOnPage'});
+    } else {
+    
+      // Create a new tab for the lyrics
+      chrome.tabs.sendRequest(tab.id, {action: 'getLyricsTitle'}, function(data){
+        chrome.tabs.create({
+          index: tab.index+1, 
+          url: chrome.extension.getURL('../contentScripts/newTab/index.html')
+        }, function(newTab){
+          chrome.tabs.sendRequest(newTab.id, {
+            title: data.title,
+            action: 'initNewTab'
+          });
+        });
+      });
+    }
   });
   
-  // Check if the version has changed.
+  // Check if the extension has been updated
   var currVersion = getVersion(),
       prevVersion = localStorage['version'];
       
   if (currVersion !== prevVersion) {
-    // Check if we just installed this extension.
     if (typeof prevVersion === 'undefined') {
       onInstall();
     } else {

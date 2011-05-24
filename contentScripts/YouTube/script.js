@@ -1,8 +1,18 @@
+LyricsPlugin.prototype.getTitleFromPage = function(){
+  // Set the video's title
+  this.currentLyrics.title = $('#watch-headline-title').text();
+  
+  return this.currentLyrics._title;
+};
+
 LyricsPlugin.prototype.init = function(){
   var html, $html, that = this;
 
   // Set the video's title
-  this.currentLyrics.title = $('#watch-headline-title').text();
+  this.getTitleFromPage();
+  
+  this.hasMaxHeight = true;
+  this.maxHeight = 426;
   
   html = [
     '<div id="ytl-outerwrapper" class="watch-module">',
@@ -58,7 +68,7 @@ LyricsPlugin.prototype.init = function(){
   // The input field for manual search
   this.elements.searchInput = $('#ytl-search-lyrics', $html);
   
-  // Create a remove from page button (Youtube style)
+  // Create a remove from page button
   this.elements.removeEl = $('#ytl-remove-lyrics', $html);
   
   // Make sure you hide the outer wrapper in first instance
