@@ -165,6 +165,9 @@ LyricsPlugin.prototype.showSearchForm = function(){
   // Show the search form
   this.showSection('searchForm');
   
+  // Set the input value
+  this.elements.searchInput.val(this.currentLyrics.title);
+  
   // Set the focus on the search input field
   this.elements.searchInput.get(0).focus();
 };

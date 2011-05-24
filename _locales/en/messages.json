@@ -1,11 +1,11 @@
-{
+﻿{
   "extName": {
-    "message": "Lyrics for YouTube\u2122",
+    "message": "Lyrics for Google Chrome\u2122",
     "description": "Title of the plugin"
   },
   
   "extDescription": {
-    "message": "Display the lyrics of any song on YouTube\u2122.",
+    "message": "Get the lyrics of any song on YouTube\u2122 and Last.fm\u2122, without annoying popups!",
     "description": "Description of the plugin"
   },
   
@@ -20,12 +20,12 @@
   },
   
   "copyrightInfo": {
-    "message": "Lyrics are property and copyright of their owners.",
+    "message": "Remember: lyrics are property of their owners.",
     "description": "First line of the copyright text after the lyrics"
   },
   
   "copyrightCourtesy": {
-    "message": "Lyrics courtesy of <a href=\"http://www.azlyrics.com\">azlyrics.com</a>",
+    "message": "Copyright by <a href=\"http://www.azlyrics.com\">azlyrics.com</a>",
     "description": "Second line of the copyright with a link to azlyrics"
   },
   
@@ -35,12 +35,47 @@
   },
   
   "notFoundHelp": {
-    "message": "Please enter the song's title and artist (i.e. \"Born this way - Lady Gaga\") and hit return: ",
+    "message": "Try to enter the <b>artist</b> and <b>title</b> manually, and hit return: ",
     "description": "Show a hint when no lyrics were found"
   },
   
   "removeLyrics": {
     "message": "Remove lyrics",
     "description": "The remove from page text"
+  },
+  
+  "settingsTitle": {
+    "message": "Lyrics for Chrome",
+    "description": "Title of the settings page"
+  },
+  
+  "settingsLyrics": {
+    "message": "How would you like to show your lyrics?",
+    "description": "Option of settings page: lyrics display"
+  },
+  
+  "addToPage": {
+    "message": "Add it to the page itself",
+    "description": "Option 1: add lyrics to the page"
+  },
+  
+  "openInNewTab": {
+    "message": "Open it in a new tab",
+    "description": "Option 2: open lyrics in a new tab page"
+  },
+  
+  "valueOk": {
+    "message": "OK",
+    "description": "Confirm button"
+  },
+  
+  "valueCancel": {
+    "message": "Cancel",
+    "description": "Cancel button"
+  },
+  
+  "underConstruction": {
+    "message": "Note: These changes won't have any effect right now. This part of the plugin is still under construction. If you have some good ideas about improvements for this plugin, feel free to add a comment at the Google Webstore. Thanks!",
+    "description": "Under construction message in the options page."
   }
 }

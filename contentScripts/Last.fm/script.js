@@ -41,7 +41,7 @@ LyricsPlugin.prototype.init = function(){
   this.elements.outerWrapper = $html = $(html);
   
   // The div that holds the actual content (no headers)
-  this.elements.innerWrapper = $('#lfc-outerwrapper', $html);
+  this.elements.innerWrapper = $('#lfc-innerwrapper', $html);
   
   // Loading message wrapper
   this.elements.loadingMessage = $('#lfc-loading-message', $html);
