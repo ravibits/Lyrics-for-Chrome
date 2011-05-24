@@ -1,9 +1,9 @@
 ﻿Lyrics for Google Chrome™
 =========================
 
-![Lyrics button](http://haampie.github.com/Lyrics-for-Chrome/images/logo-lyrics-for-chrome-banner-1-220.jpg)
-![Lyrics on YouTube™](http://haampie.github.com/Lyrics-for-Chrome/images/logo-lyrics-for-chrome-banner-2-220.jpg)
-![Lyrics on Last.fm™](http://haampie.github.com/Lyrics-for-Chrome/images/logo-lyrics-for-chrome-banner-3-220.jpg)
+[![Lyrics button](http://haampie.github.com/Lyrics-for-Chrome/images/logo-lyrics-for-chrome-banner-1-220.jpg)](http://haampie.github.com/Lyrics-for-Chrome/images/logo-lyrics-for-chrome-banner-1.jpg) 
+[![Lyrics on YouTube™](http://haampie.github.com/Lyrics-for-Chrome/images/logo-lyrics-for-chrome-banner-2-220.jpg)](http://haampie.github.com/Lyrics-for-Chrome/images/logo-lyrics-for-chrome-banner-2.jpg) 
+[![Lyrics on Last.fm™](http://haampie.github.com/Lyrics-for-Chrome/images/logo-lyrics-for-chrome-banner-3-220.jpg)](http://haampie.github.com/Lyrics-for-Chrome/images/logo-lyrics-for-chrome-banner-3.jpg)
 
 The extension
 -------------
