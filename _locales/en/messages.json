@@ -64,12 +64,12 @@
     "description": "Option 2: open lyrics in a new tab page"
   },
   
-  "valueOk": {
+  "ok": {
     "message": "OK",
     "description": "Confirm button"
   },
   
-  "valueCancel": {
+  "cancel": {
     "message": "Cancel",
     "description": "Cancel button"
   },
@@ -77,5 +77,10 @@
   "underConstruction": {
     "message": "Note: These changes won't have any effect right now. This part of the plugin is still under construction. If you have some good ideas about improvements for this plugin, feel free to add a comment at the Google Webstore. Thanks!",
     "description": "Under construction message in the options page."
+  },
+  
+  "textSize": {
+    "message": "Text size",
+    "description": "Change text size, top of the new tab page"
   }
 }

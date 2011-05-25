@@ -12,7 +12,7 @@
     .overlay {
       -webkit-box-align: center;
       -webkit-box-pack: center;
-      -webkit-transition: 0.25s opacity;
+      -webkit-transition: 0.25s opacity ease;
       background: -webkit-radial-gradient(rgba(127, 127, 127, 0.5), rgba(127, 127, 127, 0.5) 35%, rgba(0, 0, 0, 0.7));
       bottom: 0;
       display: -webkit-box;
@@ -125,8 +125,8 @@
           </div>
         </div>
         <div class="action-area">
-          <input id="show-lyrics-type-ok" type="submit" i18n-values="valueOk" value="OK">
-          <input id="show-lyrics-type-cancel" type="button" i18n-values="valueCancel" value="Cancel">
+          <input id="show-lyrics-type-ok" type="submit" i18n-values="value:ok" value="OK">
+          <input id="show-lyrics-type-cancel" type="button" i18n-values="value:cancel" value="Cancel">
         </div>
       </div>
     </form>
