@@ -5,7 +5,7 @@
 [![Lyrics on YouTube™](http://haampie.github.com/Lyrics-for-Chrome/images/logo-lyrics-for-chrome-banner-2-220.jpg)](http://haampie.github.com/Lyrics-for-Chrome/images/logo-lyrics-for-chrome-banner-2.jpg) 
 [![Lyrics on Last.fm™](http://haampie.github.com/Lyrics-for-Chrome/images/logo-lyrics-for-chrome-banner-3-220.jpg)](http://haampie.github.com/Lyrics-for-Chrome/images/logo-lyrics-for-chrome-banner-3.jpg)
 
-The extension
+The extension - [Chrome Web Store](https://chrome.google.com/webstore/developer/detail/oglbipcbkmlknhfhabolnniekmlhfoek)
 -------------
 This plugin brings lyrics to video's on YouTube™ and songs on Last.fm™, without annoying popups! The lyrics will blend flawlessly with the page, as if the lyrics section was designed by YouTube™ or Last.fm™ themselves.
 
