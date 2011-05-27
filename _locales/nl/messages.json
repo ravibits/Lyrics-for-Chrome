@@ -82,5 +82,15 @@
   "textSize": {
     "message": "Tekstgrootte",
     "description": "Change text size, top of the new tab page"
+  },
+  
+  "openPinned": {
+    "message": "Gebruik een vastgezet tabblad",
+    "description": "Do you want a pinned tab or a normal tab"
+  },
+  
+  "openNormal": {
+    "message": "Gebruik een normaal tabblad",
+    "description": "Do you want a pinned tab or a normal tab"
   }
 }

@@ -1,5 +1,5 @@
 LyricsPlugin.prototype.init = function(){
-  var that = this;
+  var self = this;
   
   this.hasMaxHeight = false;
   
@@ -26,25 +26,21 @@ LyricsPlugin.prototype.init = function(){
   
   this.elements.changeLyrics = $('#lfc-changeLyrics');
   
-  // Make sure you hide the outer wrapper in first instance
-  this.hide();
-  
-  // And also hide the lyrics and form div
-  this.elements.searchForm.hide();
-  this.elements.lyricsContent.hide();
+  this.hideSections();
+  this.showSection('searchForm');
   
   this.elements.changeLyrics.bind('click', function(e){
     e.preventDefault();
     
-    that.showSearchForm();
+    self.showSearchForm();
   });
   
   this.elements.searchForm.bind('submit', function(e) {
     e.preventDefault();
     
     // Set the title and try to get the lyrics again
-    that.handleNewTitle(that.elements.searchInput.val());
-    that.queryLyrics();
+    self.handleNewTitle(self.elements.searchInput.val());
+    self.queryLyrics();
   });
 };
 
@@ -62,10 +58,10 @@ chrome.extension.onRequest.addListener(function(request, sender, callback) {
   switch(request.action){
     case 'initNewTab':
       LP.handleNewTitle(request.title);
-      LP.onPageActionClicked();
+      LP.onPageActionClicked(request.onlyRequery);
     break;
     case 'showLyricsOnPage':
-      LP.onPageActionClicked();
+      LP.onPageActionClicked(request.onlyRequery);
     break;
   }
 });

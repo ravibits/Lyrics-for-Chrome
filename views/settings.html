@@ -105,6 +105,10 @@
       font-style: italic;
       color: #E11;
     }
+    
+    .extra {
+      margin-left: 1.4em;
+    }
   </style>
 </head>
 <body>
@@ -116,12 +120,22 @@
           <p i18n-content="underConstruction" class="epic">Note: These changes won't have any effect right now. This part of the plugin is still under construction. If you have some good ideas about improvements for this plugin, feel free to add a comment at the Google Webstore. Thanks!</p>
           <h2 i18n-content="settingsLyrics">How would you like to show your lyrics?</h2>
           <div>
-            <input id="current-tab" name="option" type="radio" value="current-tab">
+            <input id="current-tab" name="lyricsType" type="radio" value="current-tab">
             <label for="current-tab" i18n-content="addToPage">Add it to the page</label>
           </div>
           <div>
-            <input id="new-tab" name="option" type="radio" value="new-tab">
+            <input id="new-tab" name="lyricsType" type="radio" value="new-tab">
             <label for="new-tab" i18n-content="openInNewTab">Open in a new tab</label>
+            <div id="new-tab-extra-options" class="extra">
+              <div>
+                <input id="new-tab-pinned" name="option" type="radio" value="1">
+                <label for="new-tab-pinned" i18n-content="openPinned">Make it a pinned tab</label>
+              </div>
+              <div>
+                <input id="new-tab-normal" name="option" type="radio" value="0">
+                <label for="new-tab-normal" i18n-content="openNormal">Normal tab</label>
+              </div>
+            </div>
           </div>
         </div>
         <div class="action-area">
@@ -143,10 +157,16 @@
       $('#new-tab').attr('checked', 'checked');
     }
     
+    if(localStorage['tabType'] === 'pinned'){
+      $('#new-tab-pinned').attr('checked', 'checked');
+    } else {
+      $('#new-tab-normal').attr('checked', 'checked');
+    }
+    
     $('#settings').bind('submit', function(e){
       e.preventDefault();
       
-      var selected = $('[name=option]:checked');
+      var selected = $('[name=lyricsType]:checked');
       
       if(selected.length === 0){
         return;

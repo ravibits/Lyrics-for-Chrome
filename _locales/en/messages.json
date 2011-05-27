@@ -82,5 +82,15 @@
   "textSize": {
     "message": "Text size",
     "description": "Change text size, top of the new tab page"
+  },
+  
+  "openPinned": {
+    "message": "Make it a pinned tab",
+    "description": "Do you want a pinned tab or a normal tab"
+  },
+  
+  "openNormal": {
+    "message": "Create a normal tab",
+    "description": "Do you want a pinned tab or a normal tab"
   }
 }

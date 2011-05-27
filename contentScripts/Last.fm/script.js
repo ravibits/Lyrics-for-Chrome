@@ -6,7 +6,7 @@ LyricsPlugin.prototype.getTitleFromPage = function(){
 };
 
 LyricsPlugin.prototype.init = function(){
-  var html, $html, that = this;
+  var lyricsHTML, lyricsObj, self = this;
 
   // Set the video's title
   this.getTitleFromPage();
@@ -14,7 +14,7 @@ LyricsPlugin.prototype.init = function(){
   this.hasMaxHeight = true;
   this.maxHeight = 426;
   
-  html = [
+  lyricsHTML = [
     '<div id="lfc-outerwrapper">',
       '<h2 class="heading"><span class="h2Wrapper">',
         'Lyrics',
@@ -48,25 +48,25 @@ LyricsPlugin.prototype.init = function(){
   ].join('');
   
   // The div that holds everything
-  this.elements.outerWrapper = $html = $(html);
+  this.elements.outerWrapper = lyricsObj = $(lyricsHTML);
   
   // The div that holds the actual content (no headers)
-  this.elements.innerWrapper = $('#lfc-innerwrapper', $html);
+  this.elements.innerWrapper = $('#lfc-innerwrapper', lyricsObj);
   
   // Loading message wrapper
-  this.elements.loadingMessage = $('#lfc-loading-message', $html);
+  this.elements.loadingMessage = $('#lfc-loading-message', lyricsObj);
   
   // The div that holds the lyrics itself
-  this.elements.lyricsContent = $('#lfc-lyrics', $html);
+  this.elements.lyricsContent = $('#lfc-lyrics', lyricsObj);
   
   // The form which you can use to search manually for lyrics
-  this.elements.searchForm = $('#lfc-search-form', $html);
+  this.elements.searchForm = $('#lfc-search-form', lyricsObj);
   
   // The input field for manual search
-  this.elements.searchInput = $('#lfc-search-lyrics', $html);
+  this.elements.searchInput = $('#lfc-search-lyrics', lyricsObj);
   
   // Create a remove from page button
-  this.elements.removeEl = $('#lfc-remove-lyrics', $html);
+  this.elements.removeEl = $('#lfc-remove-lyrics', lyricsObj);
   
   // Make sure you hide the outer wrapper in first instance
   this.hide();
@@ -76,11 +76,11 @@ LyricsPlugin.prototype.init = function(){
   this.elements.lyricsContent.hide();
   
   // Add it to the side bar
-  $('.rightCol .statsModule').after($html);
+  $('.rightCol .statsModule').after(lyricsObj);
   
   // Set the click event for removing the lyrics from the page
   this.elements.removeEl.bind('click', function(){
-    that.hide();
+    self.hide();
     return false;
   });
   
@@ -88,7 +88,7 @@ LyricsPlugin.prototype.init = function(){
     e.preventDefault();
     
     // Set the title and try to get the lyrics again
-    that.currentLyrics.title = that.elements.searchInput.val();
-    that.queryLyrics();
+    self.currentLyrics.title = self.elements.searchInput.val();
+    self.queryLyrics();
   });
 };

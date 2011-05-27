@@ -74,12 +74,14 @@ LyricsPlugin.prototype.show = function(){
   this.isVisible = true;
 };
 
+
+
 /**
  * Handle the page action click event
  */
-LyricsPlugin.prototype.onPageActionClicked = function(){
+LyricsPlugin.prototype.onPageActionClicked = function(onlyRequery){
   
-  if(this.isVisible){
+  if(!onlyRequery && this.isVisible){
   
     // If the lyrics div is on the page, hide it
     this.hide();
@@ -190,7 +192,9 @@ LyricsPlugin.prototype.filterTitle = function(t){
  * but the height will not exceed the maximum value if set so
  */
 LyricsPlugin.prototype.animateHeight = function(el, currentHeight){
-  var height = (this.hasMaxHeight && currentHeight > this.maxHeight) ? this.maxHeight : currentHeight;
+  if(!this.hasMaxHeight) return;
+  
+  var height = currentHeight > this.maxHeight ? this.maxHeight : currentHeight;
   
   el.css('height', height + 'px');
 };

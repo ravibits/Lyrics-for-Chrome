@@ -1,5 +1,6 @@
 <script src="../javascripts/zepto.min.js"></script>
 <script>
+  var newLyricsTabId = -1;
   
   function getLyrics(title, callback) {
     var startPos, endPos, lyrics;
@@ -36,17 +37,6 @@
     });
   }
   
-  chrome.extension.onRequest.addListener(function(request, sender, callback) {
-    switch(request.action){
-      case 'getLyrics':
-        getLyrics(request.title, callback);
-      break;
-      case 'showPageActionIcon':
-        chrome.pageAction.show(sender.tab.id);
-      break;
-    }
-  });
-  
   function onInstall() {
   
   }
@@ -64,6 +54,106 @@
     return manifest.version;
   }
   
+  function onLyricsTabPrepared(tab, callback){
+    newLyricsTabId = tab.id;
+      
+    // Keep track of the lyrics tab
+    chrome.tabs.onRemoved.addListener(function(tabId, removeInfo){
+      if(newLyricsTabId === tabId){
+        newLyricsTabId = -1;
+      }
+    });
+    
+    // Create a temporary listener to check when the tab content has loaded
+    chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+      if(changeInfo.status === "complete" && tab.id === newLyricsTabId) {
+        callback.call();
+        chrome.tabs.onUpdated.removeListener(arguments.callee);
+      }
+    });
+  }
+  
+  function convertTabToLyricsTab(tabId, callback){
+    var options = {
+      url: chrome.extension.getURL('../contentScripts/newTab/index.html')
+    };
+    
+    chrome.tabs.update(tabId, options, function(newTab){
+      onLyricsTabPrepared(newTab, callback);
+    });
+  }
+  
+  function createLyricsTab(index, callback){
+    var options = {
+      url: chrome.extension.getURL('../contentScripts/newTab/index.html')
+    };
+    
+    if(index !== -1){
+      options.index = index;
+    }
+    
+    chrome.tabs.create(options, function(newTab){
+      onLyricsTabPrepared(newTab, callback);
+    });
+  }
+  
+  function openLyricsInTab(title, index){
+    // Request for the lyrics tab
+    var submitRequest = function(){
+      chrome.tabs.sendRequest(newLyricsTabId, {
+        title: title,
+        onlyRequery: true,
+        action: 'initNewTab'
+      }, function(res){
+        console.log('test', res, chrome.extension.lastError);
+      });
+    };
+    
+    if(newLyricsTabId === -1){
+      // Create a new tab for the lyrics
+      createLyricsTab(index, submitRequest);
+    } else {
+      // Make the tab selected
+      chrome.tabs.update(newLyricsTabId, {selected: true});
+      
+      // The lyrics tab already exists
+      submitRequest();
+    }
+  }
+  
+  // Omnibox default suggestion
+  chrome.omnibox.setDefaultSuggestion({description: 'Enter the song title and artist or a part of the lyrics'});
+  
+  // If input has been sent via the omnibox
+  chrome.omnibox.onInputEntered.addListener(function(title) {
+    chrome.tabs.getSelected(null, function(tab){
+      
+      // Check if you're already in the lyrics tab
+      if(newLyricsTabId === tab.id){
+        openLyricsInTab(title);
+      }
+      
+      // Set the lyrics tab to the current tab`
+      convertTabToLyricsTab(tab.id, function(){
+        openLyricsInTab(title);
+      });
+    });
+  });
+  
+  chrome.extension.onRequest.addListener(function(request, sender, callback) {
+    switch(request.action){
+      case 'newTabPageLoaded':
+        
+      break;
+      case 'getLyrics':
+        getLyrics(request.title, callback);
+      break;
+      case 'showPageActionIcon':
+        chrome.pageAction.show(sender.tab.id);
+      break;
+    }
+  });
+  
   // Send a message to the tab if the page action was clicked
   chrome.pageAction.onClicked.addListener(function(tab){
   
@@ -73,17 +163,9 @@
       chrome.tabs.sendRequest(tab.id, {action: 'showLyricsOnPage'});
     } else {
     
-      // Create a new tab for the lyrics
+      // Get the title from the page
       chrome.tabs.sendRequest(tab.id, {action: 'getLyricsTitle'}, function(data){
-        chrome.tabs.create({
-          index: tab.index+1, 
-          url: chrome.extension.getURL('../contentScripts/newTab/index.html')
-        }, function(newTab){
-          chrome.tabs.sendRequest(newTab.id, {
-            title: data.title,
-            action: 'initNewTab'
-          });
-        });
+        openLyricsInTab(data.title, tab.index+1);
       });
     }
   });

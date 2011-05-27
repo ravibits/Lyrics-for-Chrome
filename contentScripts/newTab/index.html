@@ -11,12 +11,10 @@
       line-height: 1em;
     }
     
-    html, body { height: 100%;}
-    
     body {
       font-family: Georgia, 'Times New Roman', serif;
       font-size: 1em;
-      background: #FAF0D9;
+      background: #FAF0D9 url(../../images/backgroundnoise.png) repeat 0 0 scroll;
       padding: 4em 0;
     }
     
@@ -24,10 +22,11 @@
       outline: 0;
     }
     
-    #lfc-outerwrapper, .center {
+    #lfc-outerwrapper {
       margin: 0 auto;
       max-width: 650px;
       min-width: 300px;
+      padding-left: 64px;
     }
     
     .x-small #lfc-outerwrapper {
@@ -69,17 +68,20 @@
       line-height: .9583em;
       font-size: 1.7em;
       padding: 0.148em 0 0.37em 0;
-      border-bottom: 2px solid #cdcdcc;
+      border-bottom: 2px solid #eecdae;
     }
     
     h2, h3 {
-      margin: .8em 0 0.0455em;
+      margin-bottom: 0.455em;
       font-size: 1.2em;
     }
     
     #lfc-innerwrapper {
       font-size: 1.2em;
-      padding: 1em 0;
+      margin-top: 3em;
+      position: relative;
+      padding: 1.45em;
+      background: #FFF;
     }
     
     header {
@@ -105,8 +107,6 @@
     
     #lfc-lyrics-content {
       line-height: 1.45em;
-      background: #FFF;
-      padding: 1.45em;
     }
     
     .drop-shadow {
@@ -196,28 +196,36 @@
     
     #lfc-actions {
       position: fixed;
-      width: 100%;
       top: 0;
       left: 0;
-      background: #F5EAD1;
-      padding: .5em 0;
-      z-index: 11;
+      height: 100%;
+      width: 63px;
+      border-right: 1px solid #FFF;
+      font-size: 1.2em;
+      z-index: 1;
+      background: #FFF url(../../images/shadow-y.gif) repeat-y 0 0 scroll;
     }
     
     #lfc-actions .center {
-      padding: 0 8px;
+      position: absolute;
+      top: 20px;
+      left: 11px;
     }
     
     #lfc-actions a:link, #lfc-actions a:visited {
-      border: 1px solid #F2CF80;
+      border: 1px solid #eecdae;
       display: inline-block;
-      width: 24px;
-      height: 24px;
+      width: 35px;
+      height: 35px;
+      line-height: 35px;
+      margin-bottom: 10px;
       text-align: center;
-      line-height: 24px;
       color: #707065;
       -webkit-transition: background .25s ease-out;
+      font-size: 20px;
+      font-weight: bold;
     }
+    
     
     #lfc-actions a:hover, #lfc-actions a:active, #lfc-actions a:focus {
       background: #FAF0D9;
@@ -231,23 +239,25 @@
     
     #lfc-changeLyrics {
       text-transform: none;
+      display: block;
     }
     
     #lfc-search-input {
+      box-sizing: border-box;
       padding: .5em;
-      width: 80%;
       font-size: 1.2em;
       border-radius: .5em;
       border: 1px solid #CCC;
     }
     
     #lfc-submit-button {
+      box-sizing: border-box;
+      width: 100px;
       padding: .5em;
       font-size: 1.2em;
       border-radius: .5em;
       border: 1px solid #CCC;
       cursor: pointer;
-      margin-left: 1%;
       background: -webkit-gradient(
         linear,
         left bottom,
@@ -255,6 +265,21 @@
         color-stop(0, #EEEEEE),
         color-stop(1, #F8F8F5)
       );
+    }
+      
+    #button-area {
+      display: -webkit-box;
+      -webkit-box-orient: horizontal;
+      margin-top: 1em;
+    }
+    
+    #button-area input {
+      display: block;
+    }
+    
+    #button-area input:first-child {
+      -webkit-box-flex: 1;
+      margin-right: .5em;
     }
     
     #lfc-submit-button:active, #lfc-submit-button:focus {
@@ -265,6 +290,34 @@
         color-stop(0, #F8F8F5),
         color-stop(1, #EEEEEE)
       );
+    }
+    
+    @media screen and (max-width: 729px) {
+      body {
+        padding-top: 8em;
+      }
+      
+      #lfc-actions {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 63px;
+        width: 100%;
+        border-bottom: 1px solid #FFF;
+        font-size: 1.2em;
+        z-index: 1;
+        background: #FFF url(../../images/shadow-x.gif) repeat-x left bottom scroll;
+      }
+    
+      #lfc-actions .center {
+        position: absolute;
+        top: 11px;
+        left: 20px;
+      }
+      
+      #lfc-outerwrapper {
+        padding-left: 0;
+      }
     }
   </style> 
 </head> 
@@ -281,30 +334,32 @@
       </div>      
     </header> 
     
-    <section id="lfc-innerwrapper" role="main">
+    <section id="lfc-innerwrapper" class="drop-shadow curved curved-vt-2" role="main">
       <div id="lfc-loading">
         <div id="lfc-loading-content">
           <p>Loading lyrics, hold on a second!</p>
         </div>
       </div>
-      <div id="lfc-lyrics-content" class="drop-shadow curved curved-vt-2">
+      <div id="lfc-lyrics-content">
         <p>...</p>
       </div>
       <form action="#" method="post" id="lfc-search-form">
-        <p i18n-content="notFound">Whoops, no lyrics were found!</p>
-        <p i18n-content="notFoundHelp"></p>
-        <p><input type="text" name="lfc-search-input" id="lfc-search-input" /><input type="submit" id="lfc-submit-button" value="Find" /></p>
+        <h2 i18n-content="notFound">Whoops, no lyrics were found!</h2>
+        <p i18n-values=".innerHTML:notFoundHelp"></p>
+        <p id="button-area">
+          <input type="text" name="lfc-search-input" id="lfc-search-input" />
+          <input type="submit" id="lfc-submit-button" value="Find" />
+        </p>
       </form>
-    </section> 
+    </section>
+    
+    <section id="lfc-actions">
+      <p class="center">
+        <a href="#increase" id="increase-text-size">+</a> 
+        <a href="#decrease" id="decrease-text-size">-</a>
+      </p>
+    </section>
   </article>
-  
-  <section id="lfc-actions">
-    <p class="center">
-      <span i18n-content="textSize">Text size</span>: 
-      <a href="#increase" id="increase-text-size">+</a> 
-      <a href="#decrease" id="decrease-text-size">-</a>
-    </p>
-  </section>
   
   <script src="../../javascripts/zepto.min.js"></script>
   <script src="../../javascripts/lyricsPlugin.js"></script>

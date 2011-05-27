@@ -6,7 +6,7 @@ LyricsPlugin.prototype.getTitleFromPage = function(){
 };
 
 LyricsPlugin.prototype.init = function(){
-  var html, $html, that = this;
+  var lyricsHTML, lyricsObj, self = this;
 
   // Set the video's title
   this.getTitleFromPage();
@@ -14,7 +14,7 @@ LyricsPlugin.prototype.init = function(){
   this.hasMaxHeight = true;
   this.maxHeight = 426;
   
-  html = [
+  lyricsHTML = [
     '<div id="ytl-outerwrapper" class="watch-module">',
       '<div class="watch-module-body">',
       
@@ -51,25 +51,25 @@ LyricsPlugin.prototype.init = function(){
   ].join('');
   
   // The div that holds everything
-  this.elements.outerWrapper = $html = $(html);
+  this.elements.outerWrapper = lyricsObject = $(lyricsHTML);
   
   // The div that holds the actual content (no headers)
-  this.elements.innerWrapper = $('#ytl-innerwrapper', $html);
+  this.elements.innerWrapper = $('#ytl-innerwrapper', lyricsObject);
   
   // Loading message wrapper
-  this.elements.loadingMessage = $('#ytl-loading-message', $html);
+  this.elements.loadingMessage = $('#ytl-loading-message', lyricsObject);
   
   // The div that holds the lyrics itself
-  this.elements.lyricsContent = $('#ytl-lyrics', $html);
+  this.elements.lyricsContent = $('#ytl-lyrics', lyricsObject);
   
   // The form which you can use to search manually for lyrics
-  this.elements.searchForm = $('#ytl-search-form', $html);
+  this.elements.searchForm = $('#ytl-search-form', lyricsObject);
   
   // The input field for manual search
-  this.elements.searchInput = $('#ytl-search-lyrics', $html);
+  this.elements.searchInput = $('#ytl-search-lyrics', lyricsObject);
   
   // Create a remove from page button
-  this.elements.removeEl = $('#ytl-remove-lyrics', $html);
+  this.elements.removeEl = $('#ytl-remove-lyrics', lyricsObject);
   
   // Make sure you hide the outer wrapper in first instance
   this.hide();
@@ -79,18 +79,18 @@ LyricsPlugin.prototype.init = function(){
   this.elements.lyricsContent.hide();
   
   // Add it to the side bar
-  $('#watch-sidebar').prepend($html);
+  $('#watch-sidebar').prepend(lyricsObject);
   
   // Set the click event for removing the lyrics from the page
   this.elements.removeEl.bind('click', function(){
-    that.hide();
+    self.hide();
   });
   
   this.elements.searchForm.bind('submit', function(e) {
     e.preventDefault();
     
     // Set the title and try to get the lyrics again
-    that.currentLyrics.title = that.elements.searchInput.val();
-    that.queryLyrics();
+    self.currentLyrics.title = self.elements.searchInput.val();
+    self.queryLyrics();
   });
 };
