@@ -15,7 +15,8 @@ function LyricsPlugin(){
     searchInput: $(),
     loadingMessage: $(),
     flashMessage: $(),
-    flashDescription: $()
+    flashDescription: $(),
+    flashWrap: $()
   };
   
   /**
