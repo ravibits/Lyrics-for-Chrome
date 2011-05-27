@@ -192,7 +192,7 @@ LyricsPlugin.prototype.showSearchForm = function(){
   this.elements.searchInput.val(this.currentLyrics.title);
   
   // Set the focus on the search input field
-  this.elements.searchInput.get(0).focus();
+  this.elements.searchInput.focus();
 };
 
 /**
@@ -200,7 +200,7 @@ LyricsPlugin.prototype.showSearchForm = function(){
  * like "(video)" and "(original)" at the end of the song title
  */
 LyricsPlugin.prototype.filterTitle = function(t){
-  return t.trim().replace(/( \(.+\))+$/, '');
+  return t.trim().replace(/( \(.+\))+$/g, '').trim();
 };
 
 /**

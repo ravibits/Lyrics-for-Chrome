@@ -117,7 +117,6 @@
       <div class="content">
         <h1 i18n-content="settingsTitle">Lyrics for Chrome</h1>
         <div class="content-area">
-          <p i18n-content="underConstruction" class="epic">Note: These changes won't have any effect right now. This part of the plugin is still under construction. If you have some good ideas about improvements for this plugin, feel free to add a comment at the Google Webstore. Thanks!</p>
           <h2 i18n-content="settingsLyrics">How would you like to show your lyrics?</h2>
           <div>
             <input id="current-tab" name="lyricsType" type="radio" value="current-tab">
@@ -128,11 +127,11 @@
             <label for="new-tab" i18n-content="openInNewTab">Open in a new tab</label>
             <div id="new-tab-extra-options" class="extra">
               <div>
-                <input id="new-tab-pinned" name="option" type="radio" value="1">
+                <input id="new-tab-pinned" name="pinned" type="radio" value="1">
                 <label for="new-tab-pinned" i18n-content="openPinned">Make it a pinned tab</label>
               </div>
               <div>
-                <input id="new-tab-normal" name="option" type="radio" value="0">
+                <input id="new-tab-normal" name="pinned" type="radio" value="0">
                 <label for="new-tab-normal" i18n-content="openNormal">Normal tab</label>
               </div>
             </div>
@@ -147,9 +146,17 @@
   </div>
   
   <script src="../javascripts/i18n.js"></script>
-  <script src="../javascripts/zepto.min.js"></script>
+  <script src="../javascripts/jquery-1.6.1.min.js"></script>
   <script>
     i18n.process(document);
+    
+    function toggle(){
+      if($('[name=lyricsType]:checked').prop('id') === 'current-tab'){
+        $('#new-tab-extra-options').slideUp();
+      } else {
+        $('#new-tab-extra-options').slideDown();
+      }
+    }
     
     if(localStorage['showLyricsType'] === 'onPage'){
       $('#current-tab').attr('checked', 'checked');
@@ -163,8 +170,10 @@
       $('#new-tab-normal').attr('checked', 'checked');
     }
     
-    $('#settings').bind('submit', function(e){
-      e.preventDefault();
+    $('[name=lyricsType]').change(toggle);
+    toggle();
+    
+    $('#settings').submit(function(){
       
       var selected = $('[name=lyricsType]:checked');
       
@@ -178,13 +187,29 @@
         localStorage['showLyricsType'] = 'newTab';
       }
       
+      selected = $('[name=pinned]:checked');
+      
+      if(selected.length === 0){
+        return;
+      }
+      
+      if(selected.val() === '1'){
+        localStorage['tabType'] = 'pinned';
+      } else {
+        localStorage['tabType'] = 'normal';
+      }
+      
       alert('Saved!');
+      
+      return false;
     });
     
-    $('#show-lyrics-type-cancel').bind('click', function(){
+    $('#show-lyrics-type-cancel').click(function(){
       chrome.tabs.getCurrent(function(tab){
         chrome.tabs.remove(tab.id);
       });
+      
+      return false;
     });
   </script>
 </body>

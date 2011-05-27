@@ -83,25 +83,28 @@ LyricsPlugin.prototype.init = function(){
   this.elements.lyricsContent.hide();
   
   // Change lyrics button
-  this.elements.changeLyrics.bind('click', function(e){
-    e.preventDefault();
+  this.elements.changeLyrics.click(function(){
     self.showSearchForm();
     self.setFlashMessage('searchTitle', 'searchHelp');
+    
+    return false;
   });
   
   // Add it to the side bar
   $('#watch-sidebar').prepend(lyricsObject);
   
   // Set the click event for removing the lyrics from the page
-  this.elements.removeEl.bind('click', function(){
+  this.elements.removeEl.click(function(){
     self.hide();
+    
+    return false;
   });
   
-  this.elements.searchForm.bind('submit', function(e) {
-    e.preventDefault();
-    
+  this.elements.searchForm.submit(function(e) {
     // Set the title and try to get the lyrics again
     self.currentLyrics.title = self.elements.searchInput.val();
     self.queryLyrics();
+    
+    return false;
   });
 };

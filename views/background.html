@@ -110,7 +110,8 @@
   
   function createLyricsTab(index, callback){
     var options = {
-      url: chrome.extension.getURL('../contentScripts/newTab/index.html')
+      url: chrome.extension.getURL('../contentScripts/newTab/index.html'),
+      pinned: localStorage['tabType'] === 'pinned'
     };
     
     if(index !== -1){

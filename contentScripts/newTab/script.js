@@ -33,18 +33,20 @@ LyricsPlugin.prototype.init = function(){
   this.showSection('searchForm');
   this.setFlashMessage('searchTitle', 'searchHelp');
   
-  this.elements.changeLyrics.bind('click', function(e){
-    e.preventDefault();
+  this.elements.changeLyrics.click(function(){
     self.showSearchForm();
     self.setFlashMessage('searchTitle', 'searchHelp');
+    
+    return false;
   });
   
-  this.elements.searchForm.bind('submit', function(e) {
-    e.preventDefault();
-    
+  this.elements.searchForm.submit(function() {
+  
     // Set the title and try to get the lyrics again
     self.handleNewTitle(self.elements.searchInput.val());
     self.queryLyrics();
+    
+    return false;
   });
 };
 
