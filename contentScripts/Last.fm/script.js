@@ -17,7 +17,9 @@ LyricsPlugin.prototype.init = function(){
   lyricsHTML = [
     '<div id="lfc-outerwrapper">',
       '<h2 class="heading"><span class="h2Wrapper">',
-        'Lyrics',
+        'Lyrics <a href="#" id="lfc-change-lyrics">(',
+          chrome.i18n.getMessage('changeLyrics'),
+        ')</a>',
         '<img id="lfc-remove-lyrics" src="http://cdn.last.fm/flatness/global/icon_delete.2.png" ',
           'alt="', chrome.i18n.getMessage('removeLyrics'), '"',
           'title="', chrome.i18n.getMessage('removeLyrics'), '"',
@@ -68,6 +70,8 @@ LyricsPlugin.prototype.init = function(){
   // Create a remove from page button
   this.elements.removeEl = $('#lfc-remove-lyrics', lyricsObj);
   
+  this.elements.changeLyrics = $('#lfc-change-lyrics', lyricsObj);
+  
   // Make sure you hide the outer wrapper in first instance
   this.hide();
   
@@ -77,6 +81,13 @@ LyricsPlugin.prototype.init = function(){
   
   // Add it to the side bar
   $('.rightCol .statsModule').after(lyricsObj);
+  
+  // Change lyrics button
+  this.elements.changeLyrics.bind('click', function(e){
+    e.preventDefault();
+    self.showSearchForm();
+    self.setFlashMessage('searchTitle', 'searchHelp');
+  });
   
   // Set the click event for removing the lyrics from the page
   this.elements.removeEl.bind('click', function(){

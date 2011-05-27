@@ -17,9 +17,10 @@
   "content_scripts": [
     {
       "matches": ["http://www.youtube.com/watch*"],
+      "run_at": "document_end",
       "css": ["contentScripts/YouTube/style.css"],
       "js": [
-        "javascripts/zepto.min.js",
+        "javascripts/jquery-1.6.1.min.js",
         "javascripts/LyricsPlugin.js",
         "contentScripts/YouTube/script.js", 
         "javascripts/contentScriptExecuter.js"
@@ -27,9 +28,10 @@
     },
     {
       "matches": ["http://www.last.fm/music/*/_/*"],
+      "run_at": "document_end",
       "css": ["contentScripts/Last.fm/style.css"],
       "js": [
-        "javascripts/zepto.min.js",
+        "javascripts/jquery-1.6.1.min.js",
         "javascripts/LyricsPlugin.js",
         "contentScripts/Last.fm/script.js", 
         "javascripts/contentScriptExecuter.js"
@@ -46,7 +48,7 @@
     "tabs",
     "http://google.com/search*",
     "http://www.google.com/search*",
-    "http://www.youtube.com/watch*", 
-    "http://www.azlyrics.com/lyrics/*"
+    "http://www.youtube.com/watch*",
+    "http://lyrics.wikia.com/*"
   ]
 }

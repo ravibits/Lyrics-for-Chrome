@@ -1,38 +1,56 @@
-<script src="../javascripts/zepto.min.js"></script>
+<script src="../javascripts/jquery-1.6.1.min.js"></script>
 <script>
-  var newLyricsTabId = -1;
+  var newLyricsTabId = -1, HTMLDEBUG;
+  
+  function getLyricsFromRawHtml(data){
+    var filter = function(){
+      // filters all text nodes and some inline elements out
+      return this.nodeType === Node.TEXT_NODE || $(this).is('br, i, b, strong, em');
+    };
+    
+    // create a div,
+    // append .lyricsbox's direct children to it
+    // and filter all unnecessary elements out
+    // get the html and remove the div.
+    return $('<div>').append($(data).find('.lyricbox').contents().filter(filter)).remove().html();
+  }
   
   function getLyrics(title, callback) {
-    var startPos, endPos, lyrics;
+    var startPos, 
+        endPos, 
+        lyrics,
+        url = 'http://google.com/search?sourceid=navclient&btnI=1&q=site%3Alyrics.wikia.com+' + encodeURIComponent(title);
     
-    $.get('http://google.com/search?sourceid=navclient&btnI=1&q=site%3Aazlyrics.com+' + encodeURIComponent(title), function(data, status){
-      try {
-      
-        // Check if XHR completed succesfully
-        if(status !== 'success'){
-          throw('Could not connect with azlyrics');
+    $.ajax({
+      url: url,
+      type: 'GET',
+      success: function(data, status){
+        try {
+        
+          // Check if XHR completed succesfully
+          if(status !== 'success'){
+            throw('Could not connect with azlyrics');
+          }
+          
+          lyrics = getLyricsFromRawHtml(data);
+          
+          if(lyrics.length === 0){
+            throw('No lyrics found');
+          }
+          
+          // Send lyrics back
+          callback({
+            success: true,
+            lyrics: lyrics
+          });
+        } catch(err) {
+        
+          // Error in request
+          callback({
+            success: false,
+            errorMsg: err
+          });            
         }
-        
-        startPos = data.indexOf('<!-- start of lyrics -->') + 26,
-        endPos = data.indexOf('<!-- end of lyrics -->'),
-        lyrics = data.substr(startPos, endPos - startPos);
-        
-        if(lyrics.length === 0){
-          throw('No lyrics found');
-        }
-        
-        // Send lyrics back
-        callback({
-          success: true,
-          lyrics: lyrics
-        });
-      } catch(err) {
-      
-        // Error in request
-        callback({
-          success: false,
-          errorMsg: err
-        });            
       }
     });
   }
@@ -46,12 +64,19 @@
   }
   
   function getVersion() {
-    var manifest, xhr = new XMLHttpRequest();
-        
-    xhr.open('GET', chrome.extension.getURL('manifest.json'), false);
-    xhr.send(null);
-    manifest = JSON.parse(xhr.responseText);
-    return manifest.version;
+    var version;
+    
+    // Synchronous request
+    $.ajax({
+      url: chrome.extension.getURL('manifest.json'),
+      async: false,
+      dataType: 'json',
+      success: function(data){
+        version = data.version;
+      }
+    });
+    
+    return version;
   }
   
   function onLyricsTabPrepared(tab, callback){

@@ -1,5 +1,5 @@
 function LyricsPlugin(){
-  var that = this;
+  var self = this;
   
   this.currentLyrics = {
     _title: "",
@@ -7,13 +7,15 @@ function LyricsPlugin(){
   };
 
   this.elements = {
-    innerWrapper: null, 
-    outerWrapper: null, 
-    lyricsContent: null,
-    removeEl: null,
-    searchForm: null,
-    searchInput: null,
-    loadingMessage: null
+    innerWrapper: $(), 
+    outerWrapper: $(), 
+    lyricsContent: $(),
+    removeEl: $(),
+    searchForm: $(),
+    searchInput: $(),
+    loadingMessage: $(),
+    flashMessage: $(),
+    flashDescription: $()
   };
   
   /**
@@ -27,7 +29,7 @@ function LyricsPlugin(){
    * A setter for the title, which automatically filters the title if set so
    */
   this.currentLyrics.__defineSetter__('title', function(val){
-    this._title = (this.filter ? that.filterTitle(val) : val);
+    this._title = (this.filter ? self.filterTitle(val) : val);
   });
 }
 
@@ -43,6 +45,8 @@ LyricsPlugin.prototype.hideSections = function(){
   this.elements.searchForm.hide();
   this.elements.lyricsContent.hide();
   this.elements.loadingMessage.hide();
+  this.elements.flashMessage.html('');
+  this.elements.flashDescription.html('');
 };
 
 /**
@@ -94,6 +98,14 @@ LyricsPlugin.prototype.onPageActionClicked = function(onlyRequery){
     this.queryLyrics();
   }
 };
+
+/**
+ * Can be used to show error messages
+ */
+LyricsPlugin.prototype.setFlashMessage = function(message, description){
+  this.elements.flashMessage.html(chrome.i18n.getMessage(message));
+  this.elements.flashDescription.html(chrome.i18n.getMessage(description));
+};
   
 /**
  * Set the lyrics for the current song
@@ -112,6 +124,9 @@ LyricsPlugin.prototype.lyricsCallback = function(data) {
     // so no filters are applied
     this.currentLyrics.filter = false;
     this.showSearchForm();
+    
+    this.setFlashMessage('notFound', 'notFoundHelp');
+    
   }
 };
 
@@ -121,7 +136,7 @@ LyricsPlugin.prototype.lyricsCallback = function(data) {
 LyricsPlugin.prototype.queryLyrics = function() {
   
   // Keep a reference for the callback
-  var that = this;
+  var self = this;
   
   // Display loading message
   this.hideSections();
@@ -132,7 +147,7 @@ LyricsPlugin.prototype.queryLyrics = function() {
     'action': 'getLyrics',
     'title': this.currentLyrics.title
   }, function(request){
-    that.lyricsCallback(request);
+    self.lyricsCallback(request);
   });
 };
 
@@ -181,10 +196,11 @@ LyricsPlugin.prototype.showSearchForm = function(){
 };
 
 /**
- * Removes additional info like "(video)" and "(original)" at the end of the song title
+ * Trims the string and removes additional info 
+ * like "(video)" and "(original)" at the end of the song title
  */
 LyricsPlugin.prototype.filterTitle = function(t){
-  return t.replace(/( \(.+\))+$/, '');
+  return t.trim().replace(/( \(.+\))+$/, '');
 };
 
 /**

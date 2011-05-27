@@ -105,7 +105,7 @@
       text-transform: none;
     }
     
-    #lfc-lyrics-content {
+    #lfc-lyrics-content, #article-author {
       line-height: 1.45em;
     }
     
@@ -327,36 +327,41 @@
       <div class="v-center">
         <h1 id="lfc-title">Lyrics</h1>
         <aside>
-          <span id="article-author" class="author vcard"> 
-            <em>brought to you by</em> <span class="fn">Lyrics for Chrome&#8482;</span> <em>via</em> azlyrics.com&#8482;. <a href="#" id="lfc-changeLyrics" title="Change lyrics">Change lyrics</a>
+          <span id="article-author" class="author vcard" i18n-values=".innerHTML:broughtToYou"> 
+            <em>brought to you by</em> 
+            <span class="fn">Lyrics for Chrome&#8482;</span> 
+            <em>via</em> LyricWiki&#8482;. 
           </span> 
+          <a href="#" id="lfc-changeLyrics" i18n-content="changeLyrics" i18n-values="title:changeLyrics" title="Change lyrics">Change lyrics</a>
         </aside>
       </div>      
     </header> 
     
     <section id="lfc-innerwrapper" class="drop-shadow curved curved-vt-2" role="main">
+      <div>
+        <h2 id="lfc-flash-message"></h2>
+        <p id="lfc-flash-description"></p>
+      </div>
       <div id="lfc-loading">
         <div id="lfc-loading-content">
-          <p>Loading lyrics, hold on a second!</p>
+          <p i18n-content="loadingMessage">Loading lyrics, hold on a second!</p>
         </div>
       </div>
       <div id="lfc-lyrics-content">
         <p>...</p>
       </div>
       <form action="#" method="post" id="lfc-search-form">
-        <h2 i18n-content="notFound">Whoops, no lyrics were found!</h2>
-        <p i18n-values=".innerHTML:notFoundHelp"></p>
         <p id="button-area">
           <input type="text" name="lfc-search-input" id="lfc-search-input" />
-          <input type="submit" id="lfc-submit-button" value="Find" />
+          <input type="submit" id="lfc-submit-button" i18n-values="value:find" value="Find" />
         </p>
       </form>
     </section>
     
     <section id="lfc-actions">
       <p class="center">
-        <a href="#increase" id="increase-text-size">+</a> 
-        <a href="#decrease" id="decrease-text-size">-</a>
+        <a href="#increase" id="increase-text-size" i18n-values="title:largerText">+</a> 
+        <a href="#decrease" id="decrease-text-size" i18n-values="title:smallerText">-</a>
       </p>
     </section>
   </article>

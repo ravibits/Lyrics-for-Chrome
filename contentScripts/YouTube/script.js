@@ -24,7 +24,9 @@ LyricsPlugin.prototype.init = function(){
           'title="', chrome.i18n.getMessage('removeLyrics'), '"',
         '/>',
         
-        '<h4 class="first">Lyrics</h4>',
+        '<h4 class="first">Lyrics <a href="#" id="lfc-change-lyrics">(',
+          chrome.i18n.getMessage('changeLyrics'),
+        ')</a></h4>',
         
         '<div id="ytl-innerwrapper">',
           '<div id="ytl-loading-message">',
@@ -71,12 +73,21 @@ LyricsPlugin.prototype.init = function(){
   // Create a remove from page button
   this.elements.removeEl = $('#ytl-remove-lyrics', lyricsObject);
   
+  this.elements.changeLyrics = $('#lfc-change-lyrics', lyricsObject);
+  
   // Make sure you hide the outer wrapper in first instance
   this.hide();
   
   // And also hide the lyrics and form div
   this.elements.searchForm.hide();
   this.elements.lyricsContent.hide();
+  
+  // Change lyrics button
+  this.elements.changeLyrics.bind('click', function(e){
+    e.preventDefault();
+    self.showSearchForm();
+    self.setFlashMessage('searchTitle', 'searchHelp');
+  });
   
   // Add it to the side bar
   $('#watch-sidebar').prepend(lyricsObject);

@@ -21,6 +21,9 @@ LyricsPlugin.prototype.init = function(){
   // The input field for manual search
   this.elements.searchInput = $('#lfc-search-input');
   
+  this.elements.flashMessage = $('#lfc-flash-message');
+  this.elements.flashDescription = $('#lfc-flash-description');
+  
   // There is no remove button
   this.elements.removeEl = $(null);
   
@@ -28,11 +31,12 @@ LyricsPlugin.prototype.init = function(){
   
   this.hideSections();
   this.showSection('searchForm');
+  this.setFlashMessage('searchTitle', 'searchHelp');
   
   this.elements.changeLyrics.bind('click', function(e){
     e.preventDefault();
-    
     self.showSearchForm();
+    self.setFlashMessage('searchTitle', 'searchHelp');
   });
   
   this.elements.searchForm.bind('submit', function(e) {

@@ -15,7 +15,7 @@
   },
   
   "loadingMessage": {
-    "message": "Lyrics opzoeken...",
+    "message": "Lyrics aan het opzoeken; even geduld!",
     "description": "Message when a lyrics is loading"
   },
   
@@ -25,8 +25,8 @@
   },
   
   "copyrightCourtesy": {
-    "message": "Lyrics zijn eigendom van <a href=\"http://www.azlyrics.com\">azlyrics.com</a>",
-    "description": "Second line of the copyright with a link to azlyrics"
+    "message": "Lyrics zijn eigendom van <a href=\"http://lyrics.wikia.com\" title=\"LyricsWiki\">LyricWiki</a>",
+    "description": "Second line of the copyright with a link to LyricsWiki"
   },
   
   "notFound": {
@@ -35,7 +35,12 @@
   },
   
   "notFoundHelp": {
-    "message": "Probeer de <b>titel</b> en <b>artiest</b> handmatig in te vullen en druk op enter: ",
+    "message": "Vul de <b>titel</b> en <b>artiest</b>, of een regel uit de tekst handmatig in: ",
+    "description": "Show a hint when searching for lyrics"
+  },
+  
+  "searchHelp": {
+    "message": "Vul de <b>titel</b> en <b>artiest</b> in, of een regel uit de tekst: ",
     "description": "Show a hint when no lyrics were found"
   },
   
@@ -92,5 +97,35 @@
   "openNormal": {
     "message": "Gebruik een normaal tabblad",
     "description": "Do you want a pinned tab or a normal tab"
+  },
+  
+  "searchTitle": {
+    "message": "Zoeken",
+    "description": "Search title"
+  },
+  
+  "find": {
+    "message": "Zoek",
+    "description": "Button text for the search button"
+  },
+  
+  "broughtToYou": {
+    "message": "<em>mogelijk gemaakt door</em> Lyrics for Chrome&#8482; <em>via</em> LyricWiki&#8482;.",
+    "description": "Message in the header in the new tab page"
+  },
+  
+  "changeLyrics": {
+    "message": "Andere lyrics",
+    "description": "Message to change the current lyrics -- brings you to the search form"
+  },
+  
+  "largerText": {
+    "message": "Grotere letters",
+    "description": "Title attribute for larger text size"
+  },
+  
+  "smallerText": {
+    "message": "Kleinere letters",
+    "description": "Title attribute for smaller text size"
   }
 }

@@ -10,3 +10,7 @@
   cursor: pointer;
   padding-right: 1px;
 }
+
+#lfc-change-lyrics {
+  font-size: .8em;
+}

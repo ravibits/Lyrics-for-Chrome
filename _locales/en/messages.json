@@ -15,7 +15,7 @@
   },
   
   "loadingMessage": {
-    "message": "Loading lyrics...",
+    "message": "Loading lyrics, hold on a second!",
     "description": "Message when a lyrics is loading"
   },
   
@@ -25,8 +25,8 @@
   },
   
   "copyrightCourtesy": {
-    "message": "Copyright by <a href=\"http://www.azlyrics.com\">azlyrics.com</a>",
-    "description": "Second line of the copyright with a link to azlyrics"
+    "message": "Copyright by <a href=\"http://lyrics.wikia.com\" title=\"LyricsWiki\">LyricWiki</a>",
+    "description": "Second line of the copyright with a link to LyricsWiki"
   },
   
   "notFound": {
@@ -37,6 +37,11 @@
   "notFoundHelp": {
     "message": "Try to enter the <b>artist</b> and <b>title</b> manually, and hit return: ",
     "description": "Show a hint when no lyrics were found"
+  },
+  
+  "searchHelp": {
+    "message": "Enter the <b>artist</b> and <b>title</b>, and hit return: ",
+    "description": "Show a hint when searching for lyrics"
   },
   
   "removeLyrics": {
@@ -92,5 +97,35 @@
   "openNormal": {
     "message": "Create a normal tab",
     "description": "Do you want a pinned tab or a normal tab"
+  },
+  
+  "searchTitle": {
+    "message": "Search lyrics",
+    "description": "Search title"
+  },
+  
+  "find": {
+    "message": "Find",
+    "description": "Button text for the search button"
+  },
+  
+  "broughtToYou": {
+    "message": "<em>brought to you by</em> Lyrics for Chrome&#8482; <em>via</em> LyricWiki&#8482;.",
+    "description": "Message in the header in the new tab page"
+  },
+  
+  "changeLyrics": {
+    "message": "Change lyrics",
+    "description": "Message to change the current lyrics -- brings you to the search form"
+  },
+  
+  "largerText": {
+    "message": "Larger text size",
+    "description": "Title attribute for larger text size"
+  },
+  
+  "smallerText": {
+    "message": "Smaller text size",
+    "description": "Title attribute for smaller text size"
   }
 }
