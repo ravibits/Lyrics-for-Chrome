@@ -127,5 +127,10 @@
   "smallerText": {
     "message": "Smaller text size",
     "description": "Title attribute for smaller text size"
+  },
+  
+  "settingsSaved": {
+    "message": "Settings have been saved!",
+    "description": "Alert message when saving settings"
   }
 }

@@ -57,7 +57,7 @@ LyricsPlugin.prototype.showSection = function(section){
   this.elements[section].show();
   
   // Animate the height of the content div
-  this.animateHeight(this.elements.innerWrapper, this.elements[section].height());
+  this.animateHeight(this.elements.innerWrapper, this.elements[section].height() + this.elements.flashWrap.height());
 };
 
 /**
@@ -123,9 +123,7 @@ LyricsPlugin.prototype.lyricsCallback = function(data) {
     // Make sure that the next lyrics will be searched manually
     // so no filters are applied
     this.currentLyrics.filter = false;
-    this.showSearchForm();
-    
-    this.setFlashMessage('notFound', 'notFoundHelp');
+    this.showSearchForm('notFound', 'notFoundHelp');
     
   }
 };
@@ -180,10 +178,12 @@ LyricsPlugin.prototype.showLyrics = function(lyrics){
  * Places a search form in the lyrics div
  * to search manually for lyrics
  */
-LyricsPlugin.prototype.showSearchForm = function(){
+LyricsPlugin.prototype.showSearchForm = function(flashMessage, flashText){
 
   // Hide everything
   this.hideSections();
+  
+  this.setFlashMessage(flashMessage, flashText);
   
   // Show the search form
   this.showSection('searchForm');

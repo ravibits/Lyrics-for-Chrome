@@ -3,6 +3,7 @@
   max-height: 426px;
   overflow-y: auto;
   -webkit-transition: height .3s ease-out;
+  height: auto;
 }
 
 #lfc-remove-lyrics {
@@ -13,4 +14,9 @@
 
 #lfc-change-lyrics {
   font-size: .8em;
+}
+
+#lfc-search-lyrics {
+  width: 100%;
+  -webkit-box-sizing: border-box;
 }

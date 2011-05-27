@@ -27,6 +27,12 @@ LyricsPlugin.prototype.init = function(){
         '</span>',
       '</span></h2>',
       '<div id="lfc-innerwrapper">',
+        
+        '<div id="lfc-flash-wrap">',
+          '<strong id="lfc-flash-message"></strong>',
+          '<p id="lfc-flash-description"></p>',
+        '</div>',
+          
         '<div id="lfc-loading-message">',
           chrome.i18n.getMessage('loadingMessage'),
         '</div>',
@@ -37,12 +43,6 @@ LyricsPlugin.prototype.init = function(){
         
         // this form will show up when no lyrics were found
         '<form id="lfc-search-form" action="#">',
-          '<p id="lfc-no-lyrics-found">',
-            chrome.i18n.getMessage('notFound'),
-          '</p>',
-          '<p id="lfc-form-help">',
-            chrome.i18n.getMessage('notFoundHelp'),
-          '</p>',
           '<p><input type="text" id="lfc-search-lyrics" name="lfc-search-lyrics" /></p>',
         '</form>',
       '</div>',
@@ -72,6 +72,10 @@ LyricsPlugin.prototype.init = function(){
   
   this.elements.changeLyrics = $('#lfc-change-lyrics', lyricsObj);
   
+  this.elements.flashMessage = $('#lfc-flash-message', lyricsObj);
+  this.elements.flashDescription = $('#lfc-flash-description', lyricsObj);
+  this.elements.flashWrap = $('#lfc-flash-wrap', lyricsObj);
+  
   // Make sure you hide the outer wrapper in first instance
   this.hide();
   
@@ -84,8 +88,7 @@ LyricsPlugin.prototype.init = function(){
   
   // Change lyrics button
   this.elements.changeLyrics.click(function(){
-    self.showSearchForm();
-    self.setFlashMessage('searchTitle', 'searchHelp');
+    self.showSearchForm('searchTitle', 'searchHelp');
     
     return false;
   });

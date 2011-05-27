@@ -29,6 +29,12 @@ LyricsPlugin.prototype.init = function(){
         ')</a></h4>',
         
         '<div id="ytl-innerwrapper">',
+        
+          '<div id="lfc-flash-wrap">',
+            '<strong id="lfc-flash-message"></strong>',
+            '<p id="lfc-flash-description"></p>',
+          '</div>',
+          
           '<div id="ytl-loading-message">',
             chrome.i18n.getMessage('loadingMessage'),
           '</div>',
@@ -39,12 +45,6 @@ LyricsPlugin.prototype.init = function(){
           
           // this form will show up when no lyrics were found
           '<form id="ytl-search-form" action="#">',
-            '<p id="ytl-no-lyrics-found">',
-              chrome.i18n.getMessage('notFound'),
-            '</p>',
-            '<p id="ytl-form-help">',
-              chrome.i18n.getMessage('notFoundHelp'),
-            '</p>',
             '<p><input type="text" id="ytl-search-lyrics" name="ytl-search-lyrics" /></p>',
           '</form>',
         '</div>',
@@ -75,6 +75,10 @@ LyricsPlugin.prototype.init = function(){
   
   this.elements.changeLyrics = $('#lfc-change-lyrics', lyricsObject);
   
+  this.elements.flashMessage = $('#lfc-flash-message', lyricsObject);
+  this.elements.flashDescription = $('#lfc-flash-description', lyricsObject);
+  this.elements.flashWrap = $('#lfc-flash-wrap', lyricsObject);
+  
   // Make sure you hide the outer wrapper in first instance
   this.hide();
   
@@ -84,8 +88,8 @@ LyricsPlugin.prototype.init = function(){
   
   // Change lyrics button
   this.elements.changeLyrics.click(function(){
-    self.showSearchForm();
-    self.setFlashMessage('searchTitle', 'searchHelp');
+    self.hideSections();
+    self.showSearchForm('searchTitle', 'searchHelp');
     
     return false;
   });

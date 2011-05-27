@@ -30,12 +30,10 @@ LyricsPlugin.prototype.init = function(){
   this.elements.changeLyrics = $('#lfc-changeLyrics');
   
   this.hideSections();
-  this.showSection('searchForm');
-  this.setFlashMessage('searchTitle', 'searchHelp');
+  this.showSearchForm('searchTitle', 'searchHelp');
   
   this.elements.changeLyrics.click(function(){
-    self.showSearchForm();
-    self.setFlashMessage('searchTitle', 'searchHelp');
+    self.showSearchForm('searchTitle', 'searchHelp');
     
     return false;
   });

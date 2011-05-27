@@ -1,6 +1,7 @@
 #ytl-innerwrapper {
   min-height: 15px;
   max-height: 426px;
+  height: auto;
   overflow-y: auto;
   -webkit-transition: height .3s ease-out;
 }
@@ -11,7 +12,8 @@
 }
 
 #ytl-search-lyrics {
-  width: 98%;
+  width: 95%;
+  -webkit-box-sizing: border-box;
 }
 
 #lfc-change-lyrics {
