@@ -2,7 +2,7 @@
 <html lang="en-US"> 
 <head> 
   <meta charset="UTF-8"> 
-  <title>Welcome to Lyrics for Google Chrome&#8482;</title> 
+  <title>Welcome to Lyrics for Chrome&#8482;</title> 
   <style type="text/css"> 
     
     div, p, h1, h2, h3, h4, h5, h6, ol, ul, li, dl, dt, dd, blockquote, q, small, sup, sub, code, pre, tt, samp, legend, label, table {
@@ -14,7 +14,7 @@
     body {
       font-family: Georgia, 'Times New Roman', serif;
       font-size: 1em;
-      background: #FAF0D9 url(../../images/backgroundnoise.png) repeat 0 0 scroll;
+      background: #FAF0D9 url(../images/backgroundnoise.png) repeat 0 0 scroll;
       padding: 4em 0;
     }
     
@@ -23,10 +23,10 @@
     }
     
     #lfc-outerwrapper {
+      padding: 2em;
       margin: 0 auto;
-      max-width: 650px;
+      max-width: 960px;
       min-width: 300px;
-      padding-left: 64px;
     }
     
     .x-small #lfc-outerwrapper {
@@ -71,9 +71,19 @@
       border-bottom: 2px solid #eecdae;
     }
     
-    h2, h3 {
-      margin-bottom: 0.455em;
+    h2 {
+      padding: 0.455em 0;
       font-size: 1.2em;
+    }
+    
+    h2:first-child {
+      padding-top: 0;
+    }
+    
+    h3 {
+      margin-bottom: 0.455em;
+      font-size: 1em;
+      margin-top: 1em;
     }
     
     #lfc-innerwrapper {
@@ -87,7 +97,7 @@
     header {
       margin-bottom: .6em;
       padding-left: 138px;
-      background: transparent url(../../images/icon128.png) no-repeat left top scroll;
+      background: transparent url(../images/icon128.png) no-repeat left top scroll;
       min-height: 128px;
       display: -webkit-box;
       -webkit-box-align: center;
@@ -166,10 +176,6 @@
       margin-right: 1.3125em;
     }
     
-    #lfc-loading {
-      display: none;
-    }
-    
     #lfc-loading-content {
       display: -webkit-box;
       -webkit-box-align: center;
@@ -207,7 +213,7 @@
       border-right: 1px solid #FFF;
       font-size: 1.2em;
       z-index: 1;
-      background: #FFF url(../../images/shadow-y.gif) repeat-y 0 0 scroll;
+      background: #FFF url(../images/shadow-y.gif) repeat-y 0 0 scroll;
     }
     
     #lfc-actions .center {
@@ -297,108 +303,117 @@
     }
     
     @media screen and (max-width: 729px) {
-      body {
-        padding-top: 8em;
-      }
       
-      #lfc-actions {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 63px;
-        width: 100%;
-        border-bottom: 1px solid #FFF;
-        font-size: 1.2em;
-        z-index: 1;
-        background: #FFF url(../../images/shadow-x.gif) repeat-x left bottom scroll;
-      }
-    
-      #lfc-actions .center {
-        position: absolute;
-        top: 11px;
-        left: 20px;
-      }
-      
-      #lfc-outerwrapper {
-        padding-left: 0;
-      }
     }
+    
+    .clearfix:after {
+      visibility: hidden;
+      display: block;
+      font-size: 0;
+      content: " ";
+      clear: both;
+      height: 0;
+    }
+    
+    .column {
+      width: 50%;
+      box-sizing: border-box;
+      float: left;
+      padding: 0 1.45em;
+    }
+    
+    .column:first-child {
+      padding-left: 0;
+    }
+    
+    .column:last-child {
+      padding-right: 0;
+    }
+    
+    #banner-area {
+      margin-bottom: 1.45em;
+      display: -webkit-box;
+      -webkit-box-orient: horizontal;
+      overflow-x: scroll;
+    }
+    
+    .imgwrap {
+      padding: 10px;
+    }
+    
+    .imgwrap img {
+      width: 100%;
+    }
+    
+    p + ol, p + li {
+      margin-top: 0;
+    }
+
   </style> 
 </head> 
 <body> 
   <article id="lfc-outerwrapper"> 
     <header>
       <div class="v-center">
-        <h1 id="lfc-title">Lyrics</h1>
+        <h1 id="lfc-title">Thanks for using <span i18n-content="extName"></span></h1>
         <aside>
-          <span id="article-author" class="author vcard" i18n-values=".innerHTML:broughtToYou"> 
-            <em>brought to you by</em> 
-            <span class="fn">Lyrics for Chrome&#8482;</span> 
-            <em>via</em> LyricWiki&#8482;. 
+          <span id="article-author" class="author vcard"> 
+            What's new &#8226; How it works &#8226; Support &#8226; Report an issue
           </span> 
-          <a href="#" id="lfc-changeLyrics" i18n-content="changeLyrics" i18n-values="title:changeLyrics" title="Change lyrics">Change lyrics</a>
         </aside>
-      </div>      
+      </div>
     </header> 
     
     <section id="lfc-innerwrapper" class="drop-shadow curved curved-vt-2" role="main">
-      <div>
-        <h2 id="lfc-flash-message"></h2>
-        <p id="lfc-flash-description"></p>
-      </div>
-      <div id="lfc-loading">
-        <div id="lfc-loading-content">
-          <p i18n-content="loadingMessage">Loading lyrics, hold on a second!</p>
+      <div id="lfc-lyrics-content">
+        <div id="banner-area" class="clearfix">
+          <div class="imgwrap"><img src="../images/logo-lyrics-for-chrome-banner-1.jpg" alt="" /></div>
+          <div class="imgwrap"><img src="../images/logo-lyrics-for-chrome-banner-2.jpg" alt="" /></div>
+          <div class="imgwrap"><img src="../images/logo-lyrics-for-chrome-banner-3.jpg" alt="" /></div>
+          <div class="imgwrap"><img src="../images/logo-lyrics-for-chrome-banner-4.jpg" alt="" /></div>
+        </div>
+        
+        <div class="clearfix">
+          <div class="column">
+            <h2>What's new in version 1.0</h2>
+            <p>Thanks everybody for installing and voting for my plugin! Keep on <a href="https://chrome.google.com/webstore/detail/oglbipcbkmlknhfhabolnniekmlhfoek" title="Vote 5 stars for this extension in the Chrome Webstore">voting 5 stars</a>, and I'll continue to add new features.</p>
+            <p>New in this version:</p>
+            <ul>
+              <li>Grooveshark&#8482; support!</li>
+              <li>Support for international Last.fm&#8482; websites</li>
+              <li>Minor lay-out improvement on YouTube&#8482;</li>
+            </ul>
+            <div id="fb-root"></div><script src="http://connect.facebook.net/en_US/all.js#appId=227138850641856&amp;xfbml=1"></script><fb:like href="https://chrome.google.com/webstore/detail/oglbipcbkmlknhfhabolnniekmlhfoek" send="true" layout="box_count" width="450" show_faces="false" font=""></fb:like>
+            <a href="http://twitter.com/share" class="twitter-share-button" data-url="https://chrome.google.com/webstore/detail/oglbipcbkmlknhfhabolnniekmlhfoek" data-count="vertical" data-via="HarmenStoppels">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+            <h2>Found an issue? Feedback?</h2>
+            <p>Feel free to report issues or share new ideas on <a href="https://github.com/haampie/Lyrics-for-Chrome/issues" title="Lyrics for Google Chrome on GitHub">my project on GitHub</a></p>
+          </div>
+          
+          <div class="column">
+            <h2>How it works</h2>
+            <h3>On a page</h3>
+            <ol>
+              <li>On YouTube&#8482;, Last.fm&#8482; and Grooveshark&#8482;* an icon appears in the omnibox</li>
+              <li>Click the icon and the lyrics shows up</li>
+              <li>If nothing was found, you can do a manual search</li>
+            </ol>
+            <p><small>*Grooveshark also has an icon in the menu</small></p>
+            
+            <h3>Via the omnibox</h3>
+            <p>You can also search for lyrics by starting to type &ldquo;<strong>lyrics ...</strong>&rdquo; &mdash; followed by a title, artist or a couple words from the lyrics &mdash; in the omnibox.</p>
+            
+            <h3>The <a href="settings.html">settings</a> page</h3>
+            <p>In the options page, you can choose to add the lyrics to the page, or to open it in a new tab.</p>
+          </div>
         </div>
       </div>
-      <div id="lfc-lyrics-content">
-        <p>...</p>
-      </div>
-      <form action="#" method="post" id="lfc-search-form">
-        <p id="button-area">
-          <input type="text" name="lfc-search-input" id="lfc-search-input" />
-          <input type="submit" id="lfc-submit-button" i18n-values="value:find" value="Find" />
-        </p>
-      </form>
-    </section>
-    
-    <section id="lfc-actions">
-      <p class="center">
-        <a href="#increase" id="increase-text-size" i18n-values="title:largerText">+</a> 
-        <a href="#decrease" id="decrease-text-size" i18n-values="title:smallerText">-</a>
-      </p>
     </section>
   </article>
   
-  <script src="../../javascripts/jquery-1.6.1.min.js"></script>
-  <script src="../../javascripts/lyricsPlugin.js"></script>
-  <script src="../../javascripts/i18n.js"></script>
-  <script src="script.js"></script>
+  <script src="../javascripts/jquery-1.6.1.min.js"></script>
+  <script src="../javascripts/i18n.js"></script>
   <script>
-    var bodyClasses = ['x-small', 'small', 'medium', 'large', 'x-large'], 
-        currentIndex = 2,
-        $body = $('body');
-    
     i18n.process(document);
-    
-    $('#increase-text-size').click(function(){
-      if(currentIndex + 1 === bodyClasses.length){
-        return;
-      }
-      
-      $body.removeClass(bodyClasses[currentIndex++]).addClass(bodyClasses[currentIndex]);
-      
-      return false;
-    });
-    
-    $('#decrease-text-size').click(function(){
-      if(currentIndex === 0){
-        return;
-      }
-      
-      $body.removeClass(bodyClasses[currentIndex--]).addClass(bodyClasses[currentIndex]);
-      return false;
-    });
   </script>
 </body> 
 </html>

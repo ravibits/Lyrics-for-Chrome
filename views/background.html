@@ -56,11 +56,15 @@
   }
   
   function onInstall() {
-  
+    chrome.tabs.create({
+      url: 'http://harmenstoppels.nl/lyrics-for-google-chrome/',
+    });
   }
 
   function onUpdate() {
-  
+    chrome.tabs.create({
+      url: 'http://harmenstoppels.nl/lyrics-for-google-chrome/',
+    });
   }
   
   function getVersion() {
