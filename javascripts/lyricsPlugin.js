@@ -39,6 +39,8 @@ function LyricsPlugin(){
  */
 LyricsPlugin.prototype.isVisible = false;
 
+LyricsPlugin.prototype.setSongTitleInFlashMessage = false;
+
 /**
  * Hide all sections (loading message, lyrics and search form) from the page
  */
@@ -103,9 +105,9 @@ LyricsPlugin.prototype.onPageActionClicked = function(onlyRequery){
 /**
  * Can be used to show error messages
  */
-LyricsPlugin.prototype.setFlashMessage = function(message, description){
-  this.elements.flashMessage.html(chrome.i18n.getMessage(message));
-  this.elements.flashDescription.html(chrome.i18n.getMessage(description));
+LyricsPlugin.prototype.setFlashMessage = function(message, description, i18n){
+  this.elements.flashMessage.html(i18n ? chrome.i18n.getMessage(message) : message);
+  this.elements.flashDescription.html(i18n ? chrome.i18n.getMessage(description) : description);
 };
   
 /**
@@ -173,6 +175,10 @@ LyricsPlugin.prototype.showLyrics = function(lyrics){
   this.elements.lyricsContent.html([lyrics, '<br/><br/>', chrome.i18n.getMessage("copyrightInfo"), '<br/>', chrome.i18n.getMessage("copyrightCourtesy")].join(''));
   
   this.showSection('lyricsContent');
+  
+  if(this.setSongTitleInFlashMessage){
+    this.setFlashMessage('Lyrics', this.currentLyrics.title, false);
+  }
 };
 
 /**
@@ -184,7 +190,7 @@ LyricsPlugin.prototype.showSearchForm = function(flashMessage, flashText){
   // Hide everything
   this.hideSections();
   
-  this.setFlashMessage(flashMessage, flashText);
+  this.setFlashMessage(flashMessage, flashText, true);
   
   // Show the search form
   this.showSection('searchForm');

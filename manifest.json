@@ -27,13 +27,37 @@
       ]
     },
     {
-      "matches": ["http://www.last.fm/music/*/_/*"],
+      "matches": [
+        "http://www.last.fm/music/*/_/*", 
+        "http://www.lastfm.de/music/*/_/*", 
+        "http://www.lastfm.es/music/*/_/*", 
+        "http://www.lastfm.fr/music/*/_/*",
+        "http://www.lastfm.it/music/*/_/*",
+        "http://www.lastfm.jp/music/*/_/*",
+        "http://www.lastfm.pl/music/*/_/*",
+        "http://www.lastfm.com.br/music/*/_/*",
+        "http://www.lastfm.ru/music/*/_/*",
+        "http://www.lastfm.se/music/*/_/*",
+        "http://www.lastfm.com.tr/music/*/_/*",
+        "http://cn.last.fm/music/*/_/*"
+      ],
       "run_at": "document_end",
       "css": ["contentScripts/Last.fm/style.css"],
       "js": [
         "javascripts/jquery-1.6.1.min.js",
         "javascripts/LyricsPlugin.js",
-        "contentScripts/Last.fm/script.js", 
+        "contentScripts/Last.fm/script.js",
+        "javascripts/contentScriptExecuter.js"
+      ]
+    },
+    {
+      "matches": ["http://grooveshark.com/*"],
+      "run_at": "document_end",
+      "css": ["contentScripts/Grooveshark/style.css"],
+      "js": [
+        "javascripts/jquery-1.6.1.min.js",
+        "javascripts/LyricsPlugin.js",
+        "contentScripts/Grooveshark/script.js",
         "javascripts/contentScriptExecuter.js"
       ]
     }

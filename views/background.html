@@ -5,7 +5,7 @@
   function getLyricsFromRawHtml(data){
     var filter = function(){
       // filters all text nodes and some inline elements out
-      return this.nodeType === Node.TEXT_NODE || $(this).is('br, i, b, strong, em');
+      return this.nodeType === Node.TEXT_NODE || $(this).is('p, br, i, b, strong, em');
     };
     
     // create a div,
@@ -19,7 +19,7 @@
     var startPos, 
         endPos, 
         lyrics,
-        url = 'http://google.com/search?sourceid=navclient&btnI=1&q=site%3Alyrics.wikia.com+' + encodeURIComponent(title);
+        url = 'http://google.com/search?sourceid=navclient&btnI=1&q=site%3Alyrics.wikia.com+' + encodeURIComponent(title +  ' -"Page Ranking Information"');
     
     $.ajax({
       url: url,
