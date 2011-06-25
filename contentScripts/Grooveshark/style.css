@@ -1,0 +1,60 @@
+#lfc_header_nav_lyrics a {
+  background-position: 0px 0px;
+  margin: 0 6px 0 0;
+}
+
+#lfc_header_nav_lyrics a:hover {
+  background-position: -32px 0px;
+}
+
+#lfc_header_nav_lyrics a:active {
+  background-position: -64px 0px;
+}
+
+#lfc_header_nav_lyrics.selected a {
+  background-position: -96px 0px;
+}
+
+#lfc_header_nav_lyrics.selected a:hover {
+  background-position: -128px 0px;
+}
+
+#lfc_header_nav_lyrics.selected a:active {
+  background-position: -160px 0px;
+}
+
+#header_nav_people a {
+ margin-right: 6px; 
+}
+
+#lfc-flash-wrap {
+  padding: 10px 15px;
+  background-color: #D8EBF8;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  color: #333;
+  min-height: 1em;
+}
+
+#lfc-lyrics, #lfc-loading-message {
+  line-height: 1.5;
+  padding: 20px;
+}
+
+#page_content #lfc-search-form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 326px;
+  height: 34px;
+  margin-left: -163px;
+  z-index: 500;
+}
+
+#lfc-search-form .inner .cap {
+  height: 27px;
+}
+
+#lfc-search-form .field {
+  width: 160px;
+}
