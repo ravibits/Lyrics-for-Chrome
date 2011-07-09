@@ -207,7 +207,7 @@ LyricsPlugin.prototype.showSearchForm = function(flashMessage, flashText){
  * like "(video)" and "(original)" at the end of the song title
  */
 LyricsPlugin.prototype.filterTitle = function(t){
-  return t.trim().replace(/( \(.+\))+$/g, '').trim();
+  return t.trim().replace(/( \(.+\))+$/g, '').replace(/( \[.+\])+$/g, '').trim();
 };
 
 /**

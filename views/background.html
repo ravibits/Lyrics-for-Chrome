@@ -15,6 +15,10 @@
     return $('<div>').append($(data).find('.lyricbox').contents().filter(filter)).remove().html();
   }
   
+  function getSongInfoFromRawHtml(data){
+    return $(data).find('#WikiaPageHeader h1').text();
+  }
+  
   function getLyrics(title, callback) {
     var startPos, 
         endPos, 
@@ -29,7 +33,7 @@
         
           // Check if XHR completed succesfully
           if(status !== 'success'){
-            throw('Could not connect with azlyrics');
+            throw('Could not connect with LyricWiki');
           }
           
           lyrics = getLyricsFromRawHtml(data);
@@ -41,7 +45,8 @@
           // Send lyrics back
           callback({
             success: true,
-            lyrics: lyrics
+            lyrics: lyrics,
+            providerTitle: getSongInfoFromRawHtml(data)
           });
         } catch(err) {
         
@@ -61,10 +66,12 @@
     });
   }
 
-  function onUpdate() {
-    chrome.tabs.create({
-      url: 'http://harmenstoppels.nl/lyrics-for-google-chrome/',
-    });
+  function onUpdate(prevVersion) {
+    if(prevVersion === '0.12'){
+      chrome.tabs.create({
+        url: 'http://harmenstoppels.nl/lyrics-for-google-chrome/',
+      });
+    }
   }
   
   function getVersion() {
@@ -152,10 +159,10 @@
   }
   
   // Omnibox default suggestion
-  chrome.omnibox.setDefaultSuggestion({description: 'Enter the song title and artist or a part of the lyrics'});
+  chrome.omnibox.setDefaultSuggestion({description: chrome.i18n.getMessage('omniboxHelp')});
   
   // If input has been sent via the omnibox
-  chrome.omnibox.onInputEntered.addListener(function(title) {
+  chrome.omnibox.onInputEntered.addListener(function(title){
     chrome.tabs.getSelected(null, function(tab){
       
       // Check if you're already in the lyrics tab
@@ -180,6 +187,9 @@
       break;
       case 'showPageActionIcon':
         chrome.pageAction.show(sender.tab.id);
+      break;
+      case 'currentLyricsToTab':
+        openLyricsInTab(request.title, sender.tab.index+1);
       break;
     }
   });
@@ -208,7 +218,7 @@
     if (typeof prevVersion === 'undefined') {
       onInstall();
     } else {
-      onUpdate();
+      onUpdate(prevVersion);
     }
     
     localStorage['version'] = currVersion;
