@@ -1,12 +1,22 @@
+// since v1.3: make it work for the NEW YouTube
+LyricsPlugin.prototype.newYouTube = false;
+
 LyricsPlugin.prototype.getTitleFromPage = function(){
   // Set the video's title
-  this.currentLyrics.title = $('#watch-headline-title').text();
+  if(this.newYouTube){
+    this.currentLyrics.title = $('#eow-title').text();
+  } else {
+    this.currentLyrics.title = $('#watch-headline-title').text();
+  }
   
   return this.currentLyrics._title;
 };
 
 LyricsPlugin.prototype.init = function(){
   var lyricsHTML, lyricsObj, self = this;
+  
+  // Check if you are currently on the NEW YouTube
+  this.newYouTube = $('.watch-sidecol').length !== 0;
 
   // Set the video's title
   this.getTitleFromPage();
@@ -19,14 +29,17 @@ LyricsPlugin.prototype.init = function(){
       '<div class="watch-module-body">',
       
         // clicking this image will hide the lyrics from the page
-        '<img src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" id="ytl-remove-lyrics" class="master-sprite img-php-close-button" ',
+        '<img src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" id="ytl-remove-lyrics" ',
           'alt="', chrome.i18n.getMessage('removeLyrics'), '"',
           'title="', chrome.i18n.getMessage('removeLyrics'), '"',
         '/>',
         
-        '<h4 class="first">Lyrics <a href="#" id="lfc-change-lyrics">(',
-          chrome.i18n.getMessage('changeLyrics'),
-        ')</a></h4>',
+        '<h4 class="first clearfix">',
+          '<a href="#" id="lfc-open-in-new-tab">Lyrics</a> ',
+          '<a href="#" id="lfc-change-lyrics">(',
+            chrome.i18n.getMessage('changeLyrics'),
+          ')</a>',
+        '</h4>',
         
         '<div id="ytl-innerwrapper">',
         
@@ -95,7 +108,25 @@ LyricsPlugin.prototype.init = function(){
   });
   
   // Add it to the side bar
-  $('#watch-sidebar').prepend(lyricsObject);
+  if(this.newYouTube){
+    // New youtube
+    lyricsObject.addClass('newYouTube watch-panel-section');
+    this.elements.removeEl.attr('src', '//s.ytimg.com/yt/img/watch6-icon-close-vflZt2x4c.png');
+    $('.watch-sidecol:first').prepend(lyricsObject);
+  } else {
+    // Old youtube
+    this.elements.removeEl.addClass('master-sprite img-php-close-button');
+    $('#watch-sidebar').prepend(lyricsObject);
+  }
+  
+  $('#lfc-open-in-new-tab', lyricsObject).click(function(){
+    chrome.extension.sendRequest({
+      'action': 'currentLyricsToTab',
+      'title': self.currentLyrics.title
+    });
+    
+    return false;
+  });
   
   // Set the click event for removing the lyrics from the page
   this.elements.removeEl.click(function(){

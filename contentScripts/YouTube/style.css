@@ -1,3 +1,5 @@
+
+
 #ytl-innerwrapper {
   min-height: 15px;
   max-height: 426px;
@@ -22,4 +24,30 @@
 
 #ytl-lyrics {
   padding-right: 10px;
+}
+
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+}
+
+#ytl-outerwrapper.newYouTube {
+  padding: 10px;
+  margin-bottom: 10px;
+  background: #FFF;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 1px 1px #888;
+  box-sizing: border-box;
+}
+
+#page.watch .newYouTube h4 {
+  margin-bottom: 10px;
+}
+
+.newYouTube #ytl-remove-lyrics {
+  margin: 2px 1px 0 0;
 }
