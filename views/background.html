@@ -23,7 +23,7 @@
     var startPos, 
         endPos, 
         lyrics,
-        url = 'http://google.com/search?sourceid=navclient&btnI=1&q=site%3Alyrics.wikia.com+' + encodeURIComponent(title +  ' -"Page Ranking Information"');
+        url = 'http://google.com/search?sourceid=navclient&btnI=1&q=site%3Alyrics.wikia.com+' + encodeURIComponent(' -"Page Ranking Information"' + title);
     
     $.ajax({
       url: url,
@@ -67,11 +67,9 @@
   }
 
   function onUpdate(prevVersion) {
-    if(prevVersion === '0.12'){
-      chrome.tabs.create({
-        url: 'http://harmenstoppels.nl/lyrics-for-google-chrome/',
-      });
-    }
+    chrome.tabs.create({
+      url: 'http://harmenstoppels.nl/lyrics-for-google-chrome/changelog/',
+    });
   }
   
   function getVersion() {
@@ -176,6 +174,18 @@
       });
     });
   });
+  
+  /*chrome.omnibox.onInputChanged.addListener(function(text, suggest){
+    suggest([
+        {
+          'content' : 'Adele - Someone Like You',
+          'description' : '<match>Ade</match>le - Someone Like You'
+        },{
+          'content' : 'Coldplay',
+          'description' : 'Every teardrop is a waterfall'
+        }
+    ]);
+  });*/
   
   chrome.extension.onRequest.addListener(function(request, sender, callback) {
     switch(request.action){

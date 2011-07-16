@@ -207,7 +207,13 @@ LyricsPlugin.prototype.showSearchForm = function(flashMessage, flashText){
  * like "(video)" and "(original)" at the end of the song title
  */
 LyricsPlugin.prototype.filterTitle = function(t){
-  return t.trim().replace(/( \(.+\))+$/g, '').replace(/( \[.+\])+$/g, '').trim();
+  return t
+    .replace(/\s+/gm, ' ')        // Remove all white spaces with a single space
+    .trim()                       // Trim it
+    .replace(/( \(.+\))+$/g, '')  // Remove additional info like (video)
+    .replace(/( \[.+\])+$/g, '')  // Remove additional info like [video]
+    .replace(/-(?=[^\s])/g, '- ') // Change -something to - something, so Google includes it in search
+    .trim();                      // Trim it once more.
 };
 
 /**
