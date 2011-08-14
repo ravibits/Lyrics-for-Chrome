@@ -1,4 +1,4 @@
-LyricsPlugin.prototype.getTitleFromPage = function(){
+LyricsPlugin.prototype.setTitleFromPage = function(){
   // Set the video's title
   this.currentLyrics.title = $('h1').text();
   
@@ -9,7 +9,7 @@ LyricsPlugin.prototype.init = function(){
   var lyricsHTML, lyricsObj, self = this;
 
   // Set the video's title
-  this.getTitleFromPage();
+  this.setTitleFromPage();
   
   this.hasMaxHeight = true;
   this.maxHeight = 426;

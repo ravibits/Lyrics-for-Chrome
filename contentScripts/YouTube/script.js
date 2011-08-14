@@ -1,7 +1,7 @@
 // since v1.3: make it work for the NEW YouTube
 LyricsPlugin.prototype.newYouTube = false;
 
-LyricsPlugin.prototype.getTitleFromPage = function(){
+LyricsPlugin.prototype.setTitleFromPage = function(){
   // Set the video's title
   if(this.newYouTube){
     this.currentLyrics.title = $('#eow-title').text();
@@ -19,7 +19,7 @@ LyricsPlugin.prototype.init = function(){
   this.newYouTube = $('.watch-sidecol').length !== 0;
 
   // Set the video's title
-  this.getTitleFromPage();
+  this.setTitleFromPage();
   
   this.hasMaxHeight = true;
   this.maxHeight = 426;

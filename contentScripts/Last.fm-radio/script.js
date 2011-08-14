@@ -4,9 +4,22 @@ LyricsPlugin.prototype.getTitleFromPage = function(){
       artist = $('#radioTrackMeta .artist').text();
       
   if(song.length === 0 && artist.length === 0){
+    return false;
+  }
+
+  return song + ' - ' + artist;
+};
+
+LyricsPlugin.prototype.setTitleFromPage = function(){
+  // Set the video's title
+  var song = $('#radioTrackMeta .track').text(),
+      artist = $('#radioTrackMeta .artist').text();
+      
+  if(song.length === 0 && artist.length === 0){
     this.currentLyrics.title = "";
   } else {
-    this.currentLyrics.title = $('#radioTrackMeta .track').text() + ' - ' + $('#radioTrackMeta .artist').text();
+    this.currentLyrics.title = song + ' - ' + artist;
+    this.currentLyrics.originalTitle = song + ' - ' + artist;
   }
   
   return this.currentLyrics._title;
@@ -113,11 +126,28 @@ LyricsPlugin.prototype.init = function(){
     
     return false;
   });
+  
+  this.searchIntervalCallback = function(){
+    var titleFromPage = self.getTitleFromPage();
+    
+    if(titleFromPage && titleFromPage !== self.currentLyrics.originalTitle){
+      self.setTitleFromPage();
+      self.queryLyrics();
+    }
+  };
 };
 
 // override the show function
 LyricsPlugin.prototype.show = function(){
+  this.startSearchInterval(2000);
   this.getTitleFromPage();
   this.elements.outerWrapper.show();
   this.isVisible = true;
+};
+
+LyricsPlugin.prototype.hide = function(){
+  this.stopSearchInterval(2000);
+  this.hideSections();
+  this.elements.outerWrapper.hide();
+  this.isVisible = false;
 };

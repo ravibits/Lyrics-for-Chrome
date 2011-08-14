@@ -5,7 +5,7 @@
   },
   
   "extDescription": {
-    "message": "Lees de tekst van elk liedje op YouTube\u2122, Grooveshark\u2122  en Last.fm\u2122, zonder vervelende popups!",
+    "message": "Lees de tekst van elk liedje op YouTube\u2122, Last.fm\u2122, Grooveshark\u2122 en Google Music\u2122, zonder vervelende popups!",
     "description": "Description of the plugin"
   },
   
@@ -119,6 +119,16 @@
     "description": "Message to change the current lyrics -- brings you to the search form"
   },
   
+  "refreshLyrics": {
+    "message": "Vernieuw",
+    "description": "Message to refresh the lyrics"
+  },
+  
+  "minimizeLyrics": {
+    "message": "Schuif omhoog/omlaag",
+    "description": "Message to slide up or slide down the lyrics"
+  },
+  
   "largerText": {
     "message": "Grotere letters",
     "description": "Title attribute for larger text size"
@@ -135,7 +145,7 @@
   },
   
   "omniboxHelp": {
-    "message": "Zoek op titel, artiest of deel van de lyrics",
+    "message": "Zoek op <match>titel</match>, <match>artiest</match> of <match>regel uit de lyrics</match>",
     "description": "Text when 'lyrics' is typed in the omnibox"
   }
 }

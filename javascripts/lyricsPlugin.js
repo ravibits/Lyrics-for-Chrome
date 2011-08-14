@@ -19,6 +19,18 @@ function LyricsPlugin(){
     flashWrap: $()
   };
   
+  this.searchInterval = null;
+  this.searchIntervalCallback = function(){};
+  
+  this.startSearchInterval = function(time){
+    this.searchInterval = setInterval(this.searchIntervalCallback, time);
+  };
+  
+  this.stopSearchInterval = function(){
+    clearInterval(this.searchInterval);
+    this.searchInterval = null;
+  };
+  
   /**
    * A getter for the title
    */

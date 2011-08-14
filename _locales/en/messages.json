@@ -5,7 +5,7 @@
   },
   
   "extDescription": {
-    "message": "Get the lyrics of any song on YouTube\u2122, Grooveshark\u2122 and Last.fm\u2122, without annoying popups!",
+    "message": "Get the lyrics of any song on YouTube\u2122, Last.fm\u2122, Grooveshark\u2122 and Google Music\u2122, without annoying popups!",
     "description": "Description of the plugin"
   },
   
@@ -119,6 +119,16 @@
     "description": "Message to change the current lyrics -- brings you to the search form"
   },
   
+  "refreshLyrics": {
+    "message": "Refresh",
+    "description": "Message to refresh the lyrics"
+  },
+  
+  "minimizeLyrics": {
+    "message": "Slide up/down",
+    "description": "Message to slide up or slide down the lyrics"
+  },
+  
   "largerText": {
     "message": "Larger text size",
     "description": "Title attribute for larger text size"
@@ -135,7 +145,7 @@
   },
   
   "omniboxHelp": {
-    "message": "Search for a song title, artist or part of the lyrics",
+    "message": "Search for a <match>song title</match>, <match>artist</match> or <match>part</match> of the lyrics",
     "description": "Text when 'lyrics' is typed in the omnibox"
   }
 }

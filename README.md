@@ -18,7 +18,8 @@ How it works
 - If no lyrics were found, a form on the page shows up, which enables you to do a manual search
 
 
-Original idea
+Changelog 1.4
 -------------
-
-The original idea for this extension came from [Oren Yomtov's extension](https://chrome.google.com/webstore/detail/kggldhblikkmmnbkeococbeoaacgelkf "Google Webstore - Original plugin") which adds lyrics to YouTube™ videos. He did a great job, and my first intention was to extend that plugin. However, with some extra features I decided to create a separate extension of it.
+- Google Music™ support
+- Support for playlists on Grooveshark™ and Google Music™
+- Refresh lyrics on Grooveshark™

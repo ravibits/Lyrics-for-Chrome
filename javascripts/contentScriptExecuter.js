@@ -12,7 +12,7 @@ chrome.extension.onRequest.addListener(function(request, sender, callback) {
     break;
     case 'getLyricsTitle':
       // Send the title of song to the background page
-      callback({title: LP.getTitleFromPage()});
+      callback({title: LP.setTitleFromPage()});
     break;
   }
 });

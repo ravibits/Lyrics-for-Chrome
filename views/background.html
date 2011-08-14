@@ -1,241 +1,276 @@
-<script src="../javascripts/jquery-1.6.1.min.js"></script>
-<script>
-  var newLyricsTabId = -1, HTMLDEBUG;
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+	<title>Lyrics for Google Chrome</title>
+  <script src="../javascripts/jquery-1.6.1.min.js"></script>
   
-  function getLyricsFromRawHtml(data){
-    var filter = function(){
-      // filters all text nodes and some inline elements out
-      return this.nodeType === Node.TEXT_NODE || $(this).is('p, br, i, b, strong, em');
-    };
-    
-    // create a div,
-    // append .lyricsbox's direct children to it
-    // and filter all unnecessary elements out
-    // get the html and remove the div.
-    return $('<div>').append($(data).find('.lyricbox').contents().filter(filter)).remove().html();
-  }
-  
-  function getSongInfoFromRawHtml(data){
-    return $(data).find('#WikiaPageHeader h1').text();
-  }
-  
-  function getLyrics(title, callback) {
-    var startPos, 
-        endPos, 
-        lyrics,
-        url = 'http://google.com/search?sourceid=navclient&btnI=1&q=site%3Alyrics.wikia.com+' + encodeURIComponent(' -"Page Ranking Information"' + title);
-    
-    $.ajax({
-      url: url,
-      type: 'GET',
-      success: function(data, status){
-        try {
-        
-          // Check if XHR completed succesfully
-          if(status !== 'success'){
-            throw('Could not connect with LyricWiki');
-          }
-          
-          lyrics = getLyricsFromRawHtml(data);
-          
-          if(lyrics.length === 0){
-            throw('No lyrics found');
-          }
-          
-          // Send lyrics back
-          callback({
-            success: true,
-            lyrics: lyrics,
-            providerTitle: getSongInfoFromRawHtml(data)
-          });
-        } catch(err) {
-        
-          // Error in request
-          callback({
-            success: false,
-            errorMsg: err
-          });            
-        }
-      }
-    });
-  }
-  
-  function onInstall() {
-    chrome.tabs.create({
-      url: 'http://harmenstoppels.nl/lyrics-for-google-chrome/',
-    });
-  }
+  <script>
+  // Google Analytics
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-23513852-3']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = 'https://ssl.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+  </script>
 
-  function onUpdate(prevVersion) {
-    chrome.tabs.create({
-      url: 'http://harmenstoppels.nl/lyrics-for-google-chrome/changelog/',
-    });
-  }
-  
-  function getVersion() {
-    var version;
+  <script>
+    var newLyricsTabId = -1, HTMLDEBUG;
     
-    // Synchronous request
-    $.ajax({
-      url: chrome.extension.getURL('manifest.json'),
-      async: false,
-      dataType: 'json',
-      success: function(data){
-        version = data.version;
-      }
-    });
-    
-    return version;
-  }
-  
-  function onLyricsTabPrepared(tab, callback){
-    newLyricsTabId = tab.id;
+    function getLyricsFromRawHtml(data){
+      var filter = function(){
+        // filters all text nodes and some inline elements out
+        return this.nodeType === Node.TEXT_NODE || $(this).is('p, br, i, b, strong, em');
+      };
       
-    // Keep track of the lyrics tab
-    chrome.tabs.onRemoved.addListener(function(tabId, removeInfo){
-      if(newLyricsTabId === tabId){
-        newLyricsTabId = -1;
-      }
-    });
-    
-    // Create a temporary listener to check when the tab content has loaded
-    chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
-      if(changeInfo.status === "complete" && tab.id === newLyricsTabId) {
-        callback.call();
-        chrome.tabs.onUpdated.removeListener(arguments.callee);
-      }
-    });
-  }
-  
-  function convertTabToLyricsTab(tabId, callback){
-    var options = {
-      url: chrome.extension.getURL('../contentScripts/newTab/index.html')
-    };
-    
-    chrome.tabs.update(tabId, options, function(newTab){
-      onLyricsTabPrepared(newTab, callback);
-    });
-  }
-  
-  function createLyricsTab(index, callback){
-    var options = {
-      url: chrome.extension.getURL('../contentScripts/newTab/index.html'),
-      pinned: localStorage['tabType'] === 'pinned'
-    };
-    
-    if(index !== -1){
-      options.index = index;
+      // create a div,
+      // append .lyricsbox's direct children to it
+      // and filter all unnecessary elements out
+      // get the html and remove the div.
+      return $('<div>').append($(data).find('.lyricbox').contents().filter(filter)).remove().html();
     }
     
-    chrome.tabs.create(options, function(newTab){
-      onLyricsTabPrepared(newTab, callback);
-    });
-  }
-  
-  function openLyricsInTab(title, index){
-    // Request for the lyrics tab
-    var submitRequest = function(){
-      chrome.tabs.sendRequest(newLyricsTabId, {
-        title: title,
-        onlyRequery: true,
-        action: 'initNewTab'
-      }, function(res){
-        console.log('test', res, chrome.extension.lastError);
-      });
-    };
-    
-    if(newLyricsTabId === -1){
-      // Create a new tab for the lyrics
-      createLyricsTab(index, submitRequest);
-    } else {
-      // Make the tab selected
-      chrome.tabs.update(newLyricsTabId, {selected: true});
-      
-      // The lyrics tab already exists
-      submitRequest();
+    function getSongInfoFromRawHtml(data){
+      return $(data).find('#WikiaPageHeader h1').text();
     }
-  }
-  
-  // Omnibox default suggestion
-  chrome.omnibox.setDefaultSuggestion({description: chrome.i18n.getMessage('omniboxHelp')});
-  
-  // If input has been sent via the omnibox
-  chrome.omnibox.onInputEntered.addListener(function(title){
-    chrome.tabs.getSelected(null, function(tab){
+    
+    function getLyrics(title, callback) {
+      var startPos, 
+          endPos, 
+          lyrics,
+          url = 'http://google.com/search?sourceid=navclient&btnI=1&q=site%3Alyrics.wikia.com+' + encodeURIComponent(' -"Page Ranking Information"' + title);
       
-      // Check if you're already in the lyrics tab
-      if(newLyricsTabId === tab.id){
-        openLyricsInTab(title);
-      }
-      
-      // Set the lyrics tab to the current tab`
-      convertTabToLyricsTab(tab.id, function(){
-        openLyricsInTab(title);
-      });
-    });
-  });
-  
-  /*chrome.omnibox.onInputChanged.addListener(function(text, suggest){
-    suggest([
-        {
-          'content' : 'Adele - Someone Like You',
-          'description' : '<match>Ade</match>le - Someone Like You'
-        },{
-          'content' : 'Coldplay',
-          'description' : 'Every teardrop is a waterfall'
+      $.ajax({
+        url: url,
+        type: 'GET',
+        success: function(data, status){
+          try {
+          
+            // Check if XHR completed succesfully
+            if(status !== 'success'){
+              throw('Could not connect with LyricWiki');
+            }
+            
+            lyrics = getLyricsFromRawHtml(data);
+            
+            if(lyrics.length === 0){
+              throw('No lyrics found');
+            }
+            
+            // Send info to Google Analytics
+            _gaq.push(['_trackEvent', 'Lyrics', 'Found']);
+            
+            // Send lyrics back
+            callback({
+              success: true,
+              lyrics: lyrics,
+              providerTitle: getSongInfoFromRawHtml(data)
+            });
+          } catch(err) {
+          
+            // Send info to Google Analytics
+            _gaq.push(['_trackEvent', 'Lyrics', 'Not found']);
+            
+            // Error in request
+            callback({
+              success: false,
+              errorMsg: err
+            });            
+          }
         }
-    ]);
-  });*/
-  
-  chrome.extension.onRequest.addListener(function(request, sender, callback) {
-    switch(request.action){
-      case 'newTabPageLoaded':
-        
-      break;
-      case 'getLyrics':
-        getLyrics(request.title, callback);
-      break;
-      case 'showPageActionIcon':
-        chrome.pageAction.show(sender.tab.id);
-      break;
-      case 'currentLyricsToTab':
-        openLyricsInTab(request.title, sender.tab.index+1);
-      break;
-    }
-  });
-  
-  // Send a message to the tab if the page action was clicked
-  chrome.pageAction.onClicked.addListener(function(tab){
-  
-    if(localStorage['showLyricsType'] == 'onPage'){
-    
-      // Show the lyrics on the current tab itself
-      chrome.tabs.sendRequest(tab.id, {action: 'showLyricsOnPage'});
-    } else {
-    
-      // Get the title from the page
-      chrome.tabs.sendRequest(tab.id, {action: 'getLyricsTitle'}, function(data){
-        openLyricsInTab(data.title, tab.index+1);
       });
     }
-  });
-  
-  // Check if the extension has been updated
-  var currVersion = getVersion(),
-      prevVersion = localStorage['version'];
-      
-  if (currVersion !== prevVersion) {
-    if (typeof prevVersion === 'undefined') {
-      onInstall();
-    } else {
-      onUpdate(prevVersion);
+    
+    function onInstall() {
+      chrome.tabs.create({
+        url: 'http://harmenstoppels.nl/lyrics-for-google-chrome/',
+      });
+    }
+
+    function onUpdate(prevVersion) {
+      chrome.tabs.create({
+        url: 'http://harmenstoppels.nl/lyrics-for-google-chrome/changelog/',
+      });
     }
     
-    localStorage['version'] = currVersion;
-  }
-  
-  // Check if is set whether the lyrics should show up on the page or in a new tab
-  if(typeof localStorage['showLyricsType'] === 'undefined'){
-    localStorage['showLyricsType'] = 'onPage';
-  }
-</script>
+    function getVersion() {
+      var version;
+      
+      // Synchronous request
+      $.ajax({
+        url: chrome.extension.getURL('manifest.json'),
+        async: false,
+        dataType: 'json',
+        success: function(data){
+          version = data.version;
+        }
+      });
+      
+      return version;
+    }
+    
+    function onLyricsTabPrepared(tab, callback){
+      newLyricsTabId = tab.id;
+        
+      // Keep track of the lyrics tab
+      chrome.tabs.onRemoved.addListener(function(tabId, removeInfo){
+        if(newLyricsTabId === tabId){
+          newLyricsTabId = -1;
+        }
+      });
+      
+      // Create a temporary listener to check when the tab content has loaded
+      chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+        if(changeInfo.status === "complete" && tab.id === newLyricsTabId) {
+          callback.call();
+          chrome.tabs.onUpdated.removeListener(arguments.callee);
+        }
+      });
+    }
+    
+    function convertTabToLyricsTab(tabId, callback){
+      var options = {
+        url: chrome.extension.getURL('../contentScripts/newTab/index.html')
+      };
+      
+      chrome.tabs.update(tabId, options, function(newTab){
+        onLyricsTabPrepared(newTab, callback);
+      });
+    }
+    
+    function createLyricsTab(index, callback){
+      var options = {
+        url: chrome.extension.getURL('../contentScripts/newTab/index.html'),
+        pinned: localStorage['tabType'] === 'pinned'
+      };
+      
+      if(index !== -1){
+        options.index = index;
+      }
+      
+      chrome.tabs.create(options, function(newTab){
+        onLyricsTabPrepared(newTab, callback);
+      });
+    }
+    
+    function openLyricsInTab(title, index){
+      // Request for the lyrics tab
+      var submitRequest = function(){
+        chrome.tabs.sendRequest(newLyricsTabId, {
+          title: title,
+          onlyRequery: true,
+          action: 'initNewTab'
+        }, function(res){
+          console.log('test', res, chrome.extension.lastError);
+        });
+      };
+      
+      if(newLyricsTabId === -1){
+        // Create a new tab for the lyrics
+        createLyricsTab(index, submitRequest);
+      } else {
+        // Make the tab selected
+        chrome.tabs.update(newLyricsTabId, {selected: true});
+        
+        // The lyrics tab already exists
+        submitRequest();
+      }
+    }
+    
+    // Omnibox default suggestion
+    chrome.omnibox.setDefaultSuggestion({description: chrome.i18n.getMessage('omniboxHelp')});
+    
+    // If input has been sent via the omnibox
+    chrome.omnibox.onInputEntered.addListener(function(title){
+    
+      // Send info to Google Analytics
+      _gaq.push(['_trackEvent', 'Usage', 'Omnibox']);
+      
+      chrome.tabs.getSelected(null, function(tab){
+        
+        // Check if you're already in the lyrics tab
+        if(newLyricsTabId === tab.id){
+          openLyricsInTab(title);
+        }
+        
+        // Set the lyrics tab to the current tab`
+        convertTabToLyricsTab(tab.id, function(){
+          openLyricsInTab(title);
+        });
+      });
+    });
+    
+    /*chrome.omnibox.onInputChanged.addListener(function(text, suggest){
+      suggest([
+          {
+            'content' : 'Adele - Someone Like You',
+            'description' : '<match>Ade</match>le - Someone Like You'
+          },{
+            'content' : 'Coldplay',
+            'description' : 'Every teardrop is a waterfall'
+          }
+      ]);
+    });*/
+    
+    chrome.extension.onRequest.addListener(function(request, sender, callback) {
+      switch(request.action){
+        case 'newTabPageLoaded':
+          
+        break;
+        case 'getLyrics':
+          getLyrics(request.title, callback);
+        break;
+        case 'showPageActionIcon':
+          chrome.pageAction.show(sender.tab.id);
+        break;
+        case 'currentLyricsToTab':
+          openLyricsInTab(request.title, sender.tab.index+1);
+        break;
+      }
+    });
+    
+    // Send a message to the tab if the page action was clicked
+    chrome.pageAction.onClicked.addListener(function(tab){
+      
+      // Send info to Google Analytics
+      _gaq.push(['_trackEvent', 'Usage', 'Page action', tab.url.split('/', 3).join('/')]);
+    
+      if(localStorage['showLyricsType'] == 'onPage'){
+      
+        // Show the lyrics on the current tab itself
+        chrome.tabs.sendRequest(tab.id, {action: 'showLyricsOnPage'});
+      } else {
+      
+        // Get the title from the page
+        chrome.tabs.sendRequest(tab.id, {action: 'getLyricsTitle'}, function(data){
+          openLyricsInTab(data.title, tab.index+1);
+        });
+      }
+    });
+    
+    // Check if the extension has been updated
+    var currVersion = getVersion(),
+        prevVersion = localStorage['version'];
+        
+    if (currVersion !== prevVersion) {
+      if (typeof prevVersion === 'undefined') {
+        onInstall();
+      } else {
+        onUpdate(prevVersion);
+      }
+      
+      localStorage['version'] = currVersion;
+    }
+    
+    // Check if is set whether the lyrics should show up on the page or in a new tab
+    if(typeof localStorage['showLyricsType'] === 'undefined'){
+      localStorage['showLyricsType'] = 'onPage';
+    }
+  </script>
+</head>
+<body>
+</body>
+</html>

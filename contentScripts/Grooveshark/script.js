@@ -4,9 +4,22 @@ LyricsPlugin.prototype.getTitleFromPage = function(){
       artist = $('#playerDetails_nowPlaying .artist').text();
       
   if(song.length === 0 && artist.length === 0){
+    return false;
+  }
+  
+  return song + ' - ' + artist;
+};
+
+LyricsPlugin.prototype.setTitleFromPage = function(){
+  // Set the video's title
+  var song = $('#playerDetails_nowPlaying .song').text(),
+      artist = $('#playerDetails_nowPlaying .artist').text();
+      
+  if(song.length === 0 && artist.length === 0){
     this.currentLyrics.title = "";
   } else {
-    this.currentLyrics.title = $('#playerDetails_nowPlaying .song').text() + ' - ' + $('#playerDetails_nowPlaying .artist').text();
+    this.currentLyrics.title = song + ' - ' + artist;
+    this.currentLyrics.originalTitle = song + ' - ' + artist;
   }
   
   return this.currentLyrics._title;
@@ -29,7 +42,7 @@ LyricsPlugin.prototype.init = function(){
   });
 
   // Set the video's title
-  this.getTitleFromPage();
+  this.setTitleFromPage();
   
   // The height is controlled by Grooveshark itself
   this.hasMaxHeight = false;
@@ -45,6 +58,9 @@ LyricsPlugin.prototype.init = function(){
           '</h3>',
         '</div>',
         '<div class="page_options">',
+          '<button id="lfc-refresh-lyrics" class="btn btn_style2" type="button"><div><span class="label">',
+            chrome.i18n.getMessage('refreshLyrics'),
+          '</span></div></button>',
           '<button id="lfc-change-lyrics" class="btn btn_style2" type="button"><div><span class="label">',
             chrome.i18n.getMessage('changeLyrics'),
           '</span></div></button>',
@@ -106,6 +122,7 @@ LyricsPlugin.prototype.init = function(){
   this.elements.searchInput = $('#lfc-search-lyrics', lyricsObject);
   
   this.elements.changeLyrics = $('#lfc-change-lyrics', lyricsObject);
+  this.elements.refreshLyrics = $('#lfc-refresh-lyrics', lyricsObject);
   
   this.elements.flashMessage = $('#lfc-flash-message', lyricsObject);
   this.elements.flashDescription = $('#lfc-flash-description', lyricsObject);
@@ -122,6 +139,14 @@ LyricsPlugin.prototype.init = function(){
   this.elements.changeLyrics.click(function(){
     self.hideSections();
     self.showSearchForm('searchTitle', 'searchHelp');
+    
+    return false;
+  });
+  
+  // Refresh lyrics button
+  this.elements.refreshLyrics.click(function(){
+    self.setTitleFromPage();
+    self.queryLyrics();
     
     return false;
   });
@@ -162,19 +187,30 @@ LyricsPlugin.prototype.init = function(){
   $('#lfc-search-button').live('click', function(){
     self.elements.searchForm.submit();
   });
+  
+  this.searchIntervalCallback = function(){
+    var titleFromPage = self.getTitleFromPage();
+    
+    if(titleFromPage && titleFromPage !== self.currentLyrics.originalTitle){
+      self.setTitleFromPage();
+      self.queryLyrics();
+    }
+  };
 };
 
 /**
  * Override the .show function
  */
 LyricsPlugin.prototype.show = function(){
-  this.getTitleFromPage();
+  this.startSearchInterval(2000);
+  this.setTitleFromPage();
   this.addToPage();
   this.elements.outerWrapper.show();
   this.isVisible = true;
 };
 
 LyricsPlugin.prototype.hide = function(){
+  this.stopSearchInterval();
   this.hideSections();
   this.elements.outerWrapper.hide();
   this.animateHeight(this.elements.innerWrapper, 0);
