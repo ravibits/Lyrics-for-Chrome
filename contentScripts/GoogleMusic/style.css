@@ -1,0 +1,56 @@
+#lfc-innerwrapper {
+  min-height: 15px;
+  margin-left: 10px;
+}
+
+#lfc-remove-lyrics {
+  float: right;
+  cursor: pointer;
+  padding-right: 1px;
+}
+
+#lfc-change-lyrics {
+  font-size: .8em;
+}
+
+#lfc-search-lyrics {
+  width: 100%;
+  -webkit-box-sizing: border-box;
+}
+
+#lfc-flash-description {
+  padding: .5em 0;
+  margin: 0;
+}
+
+#lfc-refresh-lyrics, 
+#lfc-change-lyrics, 
+#lfc-minimize-lyrics {
+  background-position: 6px 0;
+  margin: 5px 0 3px;
+  height: 16px;
+}
+
+#lfc-refresh-lyrics:hover, 
+#lfc-change-lyrics:hover, 
+#lfc-minimize-lyrics:hover {
+  background-position: 6px -16px;
+}
+
+#lfc-refresh-lyrics:active, 
+#lfc-change-lyrics:active, 
+#lfc-minimize-lyrics:active {
+  background-position: 6px -32px;
+}
+
+.minimized #lfc-minimize-lyrics {
+  background-position: -14px 0;
+}
+
+.minimized #lfc-minimize-lyrics:hover {
+  background-position: -14px -16px;
+}
+
+.minimized #lfc-minimize-lyrics:active {
+  background-position: -14px -32px;
+}

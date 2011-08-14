@@ -1,0 +1,382 @@
+<!DOCTYPE HTML> 
+<html lang="en">
+<head> 
+  <meta charset="UTF-8">
+
+  <meta name="description" content="Lyrics for Google Chrome&#8482; enables you to add the lyrics of a song to the page on Chrome">
+  <meta name="author" content="Harmen Stoppels">
+
+  <link rel="shortcut icon" href="/images/icon16.png">
+
+  <title>Welcome to Lyrics for Chrome&#8482;</title>
+  
+  <style type="text/css"> 
+    
+    div, p, h1, h2, h3, h4, h5, h6, ol, ul, li, dl, dt, dd, blockquote, q, small, sup, sub, code, pre, tt, samp, legend, label, table {
+      margin: 0;
+      padding: 0;
+      line-height: 1em;
+    }
+    
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 1em;
+      background: #FAF0D9 url(images/backgroundnoise.png) repeat 0 0 scroll;
+      padding: 4em 0;
+    }
+    
+    :focus {
+      outline: 0;
+    }
+    
+    #lfc-outerwrapper {
+      padding: 2em;
+      margin: 0 auto;
+      max-width: 960px;
+      min-width: 300px;
+    }
+    
+    a:link, a:visited {
+      text-decoration: none;
+      color: #9C0001;
+    }
+    
+    a:hover, a:active {
+      color: #CD0001;
+      text-decoration: underline;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 600;
+    }
+    
+    h1 {
+      line-height: .9583em;
+      font-size: 1.7em;
+      padding: 0.148em 0 0.37em 0;
+      border-bottom: 2px solid #eecdae;
+    }
+    
+    h2 {
+      padding: 0.455em 0;
+      font-size: 1.2em;
+    }
+    
+    h2:first-child {
+      padding-top: 0;
+    }
+    
+    h3 {
+      margin-bottom: 0.455em;
+      font-size: 1em;
+      margin-top: 1em;
+    }
+    
+    #lfc-innerwrapper {
+      font-size: 1.2em;
+      margin-top: 3em;
+      position: relative;
+      padding: 1.45em;
+      background: #FFF;
+    }
+    
+    header {
+      margin-bottom: .6em;
+      padding-left: 138px;
+      background: transparent url(images/icon128.png) no-repeat left top scroll;
+      min-height: 128px;
+      display: -moz-box;
+      display: -webkit-box;
+      -webkit-box-align: center;
+      -moz-box-align: center;
+    }
+    
+    aside {
+      text-transform: uppercase;
+      font-size: .85em;
+      letter-spacing: .09em;
+      margin-top: 1em;
+      color: #707065;
+    }
+    
+    aside em {
+      text-transform: none;
+    }
+    
+    #lfc-lyrics-content, #article-author {
+      line-height: 1.45em;
+    }
+    
+    .drop-shadow {
+      position: relative;
+      -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+      -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    }
+    
+    .drop-shadow:before,
+    .drop-shadow:after {
+      content:"";
+      position:absolute; 
+      z-index:-2;
+    }
+    
+    .curved:before {
+      top:10px;
+      bottom:10px;
+      left:0;
+      right:50%;
+      -webkit-box-shadow:0 0 15px rgba(0,0,0,0.6);
+      -moz-box-shadow:0 0 15px rgba(0,0,0,0.6);
+      box-shadow:0 0 15px rgba(0,0,0,0.6);
+      -moz-border-radius:10px / 100px;
+      border-radius:10px / 100px;
+    }
+    
+    .curved-vt-2:before {
+      right:0;
+    }
+    
+    p {
+      line-height : 1.45em;
+    }
+    
+    ul, ol {
+      margin: 1em 0 1em 2em;
+    }
+    
+    li {
+      line-height: 150%;;
+    }
+    
+    hr {
+      clear: both;
+      margin: 0 0 1.3125em;
+      display: block;
+      font-size: 1em;
+      line-height: 1.4375em;
+      outline: 0;
+      height: 1px;
+      background: #DCD9D5;
+      border: none;
+    }
+    
+    #lfc-logo {
+      float: left;
+      margin-right: 1.3125em;
+    }
+    
+    .v-center {
+      width: 100%;
+      position: relative;
+    }
+    
+    .clearfix:after {
+      visibility: hidden;
+      display: block;
+      font-size: 0;
+      content: " ";
+      clear: both;
+      height: 0;
+    }
+    
+    .column {
+      width: 50%;
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      float: left;
+      padding: 0 1.45em;
+    }
+    
+    .column:first-child {
+      padding-left: 0;
+    }
+    
+    .column:last-child {
+      padding-right: 0;
+    }
+    
+    #banner-area {
+      margin-bottom: 1.45em;
+      overflow-x: scroll;
+    }
+
+    .images {
+      display: -webkit-box;
+      display: -moz-box;
+      -webkit-box-orient: horizontal;
+      -moz-box-orient: horizontal;
+      margin-bottom: .5em;
+    }
+    
+    .imgwrap {
+      padding: 1em;
+      padding-right: 0;
+      background: rgba(100, 100, 100, .1);
+    }
+
+    .imgwrap:last-child {
+      padding-right: 1em;
+    }
+
+    .imgwrap img {
+      box-shadow: 0 2px 3px rgba(0, 0, 0, .2);
+    }
+    
+    p + ol, p + li {
+      margin-top: 0;
+    }
+
+    footer {
+      padding-top: 1em;
+      margin-top: 3em;
+      font-size: .8em;
+      border-top: 1px solid #CCC;
+    }
+
+    #social-media {
+      margin-top: 1.45em;
+    }
+
+    #facebook-wrap, #twitter-wrap {
+      float: left;
+      margin-right: 1em;
+    }
+
+    /* Let's get this party started */
+    #banner-area::-webkit-scrollbar {
+      height: 10px;
+      margin-bottom: -20px;
+    }
+
+    #banner-area::-webkit-scrollbar-button:start:decrement,
+    #banner-area::-webkit-scrollbar-button:end:increment {
+      display: none;
+    }
+
+    /* Turn off the down area up on top, and up area on bottom */
+    #banner-area::-webkit-scrollbar-button:start:increment,
+    #banner-area::-webkit-scrollbar-button:end:decrement {
+      display: none;
+    }
+
+    #banner-area::-webkit-scrollbar-track {
+      border-width:7px;
+      background: #cecece;
+      border-radius: 5px;
+    }
+
+    /* Top area above thumb and below up button */
+    #banner-area::-webkit-scrollbar-track-piece:start {
+      border: none;
+    }
+
+    /* Bottom area below thumb and down button */
+    #banner-area::-webkit-scrollbar-track-piece:end {
+      border: none;
+    }
+
+    /* Track below and above */
+    #banner-area::-webkit-scrollbar-track-piece {
+      background-color: transparent;
+    }
+
+    /* The thumb itself */
+    #banner-area::-webkit-scrollbar-thumb {
+      border-width:7px;
+      -webkit-transition:0.2s linear;
+      background: #aaa;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    /* Corner */
+    #banner-area::-webkit-scrollbar-corner {
+      background-color: transparent;
+    }
+
+  </style>
+  <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-23513852-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+  </script>
+</head> 
+<body> 
+  <article id="lfc-outerwrapper"> 
+    <header>
+      <div class="v-center">
+        <h1 id="lfc-title">Thanks for using <a href="https://chrome.google.com/webstore/detail/oglbipcbkmlknhfhabolnniekmlhfoek" title="Lyrics extension for Chrome">Lyrics for Google Chrome&#8482;</a></h1>
+        <aside>
+          <span id="article-author" class="author vcard"> 
+            What's new &#8226; How it works &#8226; Support &#8226; Report an issue
+          </span> 
+        </aside>
+      </div>
+    </header> 
+    
+    <section id="lfc-innerwrapper" class="drop-shadow curved curved-vt-2" role="main">
+      <div id="lfc-lyrics-content">
+        <div id="banner-area" class="clearfix">
+          <div class="images">
+            <div class="imgwrap"><img src="images/logo-lyrics-for-chrome-banner-1.jpg" alt="Click the icon for the lyrics" title="Click the icon for the lyrics" /></div>
+            <div class="imgwrap"><img src="images/logo-lyrics-for-chrome-banner-2.jpg" alt="Lyrics on YouTube&#8482;" title="Lyrics on YouTube&#8482;" /></div>
+            <div class="imgwrap"><img src="images/logo-lyrics-for-chrome-banner-5.jpg" alt="Lyrics on Grooveshark&#8482;" title="Lyrics on Grooveshark&#8482;" /></div>
+            <div class="imgwrap"><img src="images/logo-lyrics-for-chrome-banner-3.jpg" alt="Lyrics on Last.fm&#8482;" title="Lyrics on Last.fm&#8482;" /></div>
+            <div class="imgwrap"><img src="images/logo-lyrics-for-chrome-banner-4.jpg" alt="Special lyrics tab" title="Special lyrics tab" /></div>
+          </div>
+        </div>
+        
+        <div class="clearfix">
+          <div class="column">
+            <h2>What's new in version 1.0</h2>
+            <p>Thanks everybody for installing and voting for my plugin! Keep on <a href="https://chrome.google.com/webstore/detail/oglbipcbkmlknhfhabolnniekmlhfoek" title="Vote 5 stars for this extension in the Chrome Webstore">voting 5 stars</a>, and I'll continue to add new features.</p>
+            <p>New in this version:</p>
+            <ul>
+              <li>Grooveshark&#8482; support!</li>
+              <li>Support for international Last.fm&#8482; websites</li>
+              <li>Minor lay-out improvement on YouTube&#8482;</li>
+            </ul>
+            
+            <h2>Found an issue? Feedback?</h2>
+            <p>Feel free to report issues or share new ideas on <a href="https://github.com/haampie/Lyrics-for-Chrome/issues" title="Lyrics for Google Chrome on GitHub">my project on GitHub</a>.</p>
+
+            <div id="social-media" class="clearfix">
+              <div id="twitter-wrap"><a href="http://twitter.com/share" class="twitter-share-button" data-url="https://chrome.google.com/webstore/detail/oglbipcbkmlknhfhabolnniekmlhfoek" data-count="vertical" data-via="HarmenStoppels">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></div>
+              <div id="facebook-wrap"><iframe src="http://www.facebook.com/plugins/like.php?app_id=227138850641856&amp;href=https%3A%2F%2Fchrome.google.com%2Fwebstore%2Fdetail%2Foglbipcbkmlknhfhabolnniekmlhfoek&amp;send=false&amp;layout=box_count&amp;width=75&amp;show_faces=false&amp;action=recommend&amp;colorscheme=light&amp;font&amp;height=90" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:75px; height:90px;" allowTransparency="true"></iframe></div>
+            </div>
+          </div>
+          
+          <div class="column">
+            <h2>How it works</h2>
+            <h3>On a page</h3>
+            <ol>
+              <li>On YouTube&#8482;, Last.fm&#8482; and Grooveshark&#8482;* an icon appears in the omnibox</li>
+              <li>Click the icon and the lyrics shows up</li>
+              <li>If nothing was found, you can do a manual search</li>
+            </ol>
+            <p><small>*Grooveshark also has an icon in the menu</small></p>
+            
+            <h3>Via the omnibox</h3>
+            <p>You can also search for lyrics by starting to type &ldquo;<strong>lyrics ...</strong>&rdquo; &mdash; followed by a title, artist or a couple words from the lyrics &mdash; in the omnibox.</p>
+            
+            <h3>The options page</h3>
+            <p>In the options page, you can choose to add the lyrics to the page, or to open it in a new tab.</p>
+            <p>Get to the options page via <code>options > tools > extensions</code>, or, when the icon is visible: <code>right mouse > options</code>.</p>
+          </div>
+        </div>
+      </div>
+      <footer>
+        <p>This extension was made by Harmen Stoppels</p>
+      </footer>
+    </section>
+  </article>
+</body> 
+</html>
