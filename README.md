@@ -4,6 +4,9 @@
 [![Lyrics button](http://haampie.github.com/Lyrics-for-Chrome/images/logo-lyrics-for-chrome-banner-1-220.jpg)](http://haampie.github.com/Lyrics-for-Chrome/images/logo-lyrics-for-chrome-banner-1.jpg) 
 [![Lyrics on YouTube™](http://haampie.github.com/Lyrics-for-Chrome/images/logo-lyrics-for-chrome-banner-2-220.jpg)](http://haampie.github.com/Lyrics-for-Chrome/images/logo-lyrics-for-chrome-banner-2.jpg) 
 [![Lyrics on Last.fm™](http://haampie.github.com/Lyrics-for-Chrome/images/logo-lyrics-for-chrome-banner-3-220.jpg)](http://haampie.github.com/Lyrics-for-Chrome/images/logo-lyrics-for-chrome-banner-3.jpg)
+[![Lyrics on Grooveshark™](http://haampie.github.com/Lyrics-for-Chrome/images/logo-lyrics-for-chrome-banner-5-220.jpg)](http://haampie.github.com/Lyrics-for-Chrome/images/logo-lyrics-for-chrome-banner-5.jpg) 
+[![Lyrics on Google Music™](http://haampie.github.com/Lyrics-for-Chrome/images/logo-lyrics-for-chrome-banner-9-220.jpg)](http://haampie.github.com/Lyrics-for-Chrome/images/logo-lyrics-for-chrome-banner-9.jpg) 
+[![Lyrics on YouTube™ Cosmic Panda](http://haampie.github.com/Lyrics-for-Chrome/images/logo-lyrics-for-chrome-banner-6-220.jpg)](http://haampie.github.com/Lyrics-for-Chrome/images/logo-lyrics-for-chrome-banner-6.jpg) 
 
 The extension - [Chrome Web Store](https://chrome.google.com/webstore/developer/detail/oglbipcbkmlknhfhabolnniekmlhfoek)
 -------------
