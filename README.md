@@ -7,18 +7,27 @@
 
 The extension - [Chrome Web Store](https://chrome.google.com/webstore/developer/detail/oglbipcbkmlknhfhabolnniekmlhfoek)
 -------------
-This plugin brings lyrics to video's on YouTube™ and songs on Last.fm™, without annoying popups! The lyrics will blend flawlessly with the page, as if the lyrics section was designed by YouTube™ or Last.fm™ themselves.
+This plugin brings lyrics to video's and songs on YouTube™, Last.fm™, Grooveshark™ and Google Music™, without annoying popups! You can either chose to blend the lyrics flawlessly with the page, or show them in a beautifully designed tab.
 
 How it works
 ------------
 
-- A small icon will show up on music pages, next to the URL bar
-- Clicking this icon will add another section to the page
-- Automatically, the lyrics are fetched from A - Z Lyrics™
+- A small icon shows up on music pages, next to the URL bar
+- Clicking this icon adds another section to the page
+- Automatically, the lyrics are fetched from LyricsWiki™
 - If no lyrics were found, a form on the page shows up, which enables you to do a manual search
 
+- You can also start searching for lyrics, by typing "lyrics ..." in the omnibox
+- Not only is it possible to search for a song title, you can also search for words you remember of the lyrics
 
-Changelog 1.4
+
+Plans for the next release
+--------------------------
+
+-  Multiple lyrics providers (especially useful for Spanish and Russian users)
+
+
+[Changelog](http://harmenstoppels.nl/lyrics-for-google-chrome/changelog/) v1.4
 -------------
 - Google Music™ support
 - Support for playlists on Grooveshark™ and Google Music™
