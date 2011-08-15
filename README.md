@@ -22,7 +22,7 @@ How it works
 - Automatically, the lyrics are fetched from LyricsWiki™
 - If no lyrics were found, a form on the page shows up, which enables you to do a manual search
 
-
+Plus
 - You can also start searching for lyrics, by typing "lyrics ..." in the omnibox
 - Not only is it possible to search for a song title, you can also search for words you remember of the lyrics
 
