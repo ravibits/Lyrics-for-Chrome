@@ -209,6 +209,8 @@
     
     if(localStorage['showLyricsType'] === 'onPage'){
       $('#current-tab').attr('checked', 'checked');
+    } else if(localStorage['showLyricsType'] === 'popup'){
+      $('#in-popup').attr('checked', 'checked');
     } else {
       $('#new-tab').attr('checked', 'checked');
     }

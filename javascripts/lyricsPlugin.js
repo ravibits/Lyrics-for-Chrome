@@ -127,11 +127,40 @@ LyricsPlugin.prototype.setFlashMessage = function(message, description, i18n){
  * or add a search form if no lyrics were found
  */
 LyricsPlugin.prototype.lyricsCallback = function(data) {
+  var lyrics = $('<div/>');
+  
+  function hideNewPopupNotification(notification){
+    notification.slideUp();
+    
+    chrome.extension.sendRequest({
+      'action': 'hideNewPopupNotification'
+    });
+    localStorage['showNewPopupNotification'] = 'false';
+  }
   
   if (data.success) {
+  
+    if(data.showNewPopupNotification){
+      var notification = $('<span style="display: block; margin-bottom: 1em; background: #FFC; padding: 1em; border: 1px solid #DDA; cursor: pointer;">Try the new popup! <span style="font-size: smaller;color: #AA9;float: right;line-height: 16px;">Hide</span></span>');
+      notification.click(function(){
+        chrome.extension.sendRequest({
+          'action': 'openSettings',
+        }, function(){
+          hideNewPopupNotification(notification)
+        });
+        return false;
+      });
+      
+      notification.find('span').click(function(){
+        hideNewPopupNotification(notification);
+        return false;
+      });
+      
+      lyrics.append(notification).html();
+    }
     
     // We've found the lyrics successfully, so show it
-    this.showLyrics(data.lyrics);
+    this.showLyrics(lyrics.append(data.lyrics));
   } else {
   
     // No lyrics found
@@ -184,8 +213,8 @@ LyricsPlugin.prototype.showLyrics = function(lyrics){
   this.hideSections();
   
   // Insert the lyrics
-  this.elements.lyricsContent.html([lyrics, '<br/><br/>', chrome.i18n.getMessage("copyrightInfo"), '<br/>', chrome.i18n.getMessage("copyrightCourtesy")].join(''));
-  
+  this.elements.lyricsContent.html('').append(lyrics.contents());
+  this.elements.lyricsContent.append(['<br/><br/>', chrome.i18n.getMessage("copyrightInfo"), '<br/>', chrome.i18n.getMessage("copyrightCourtesy")].join(''));
   this.showSection('lyricsContent');
   
   if(this.setSongTitleInFlashMessage){

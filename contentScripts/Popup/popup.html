@@ -3,8 +3,8 @@
 <head> 
   <meta charset="UTF-8">
   <title>[Song] &mdash; Lyrics for Chrome&#8482;</title>
-  <meta itemprop="name" content="Lyrics voor Google Chrome™">
-  <meta itemprop="description" content="Get the lyrics of any song on YouTube™, Last.fm™, Grooveshark™ and Google Music™, without annoying popups!">
+  <meta itemprop="name" i18n-values="content:extName" content="Lyrics for Google Chrome™">
+  <meta itemprop="description" i18n-values="content:extDescription" content="Get the lyrics of any song on YouTube™, Last.fm™, Grooveshark™ and Google Music™, without annoying popups!">
   <meta itemprop="image" content="https://lh6.googleusercontent.com/OgrJ7kKeK2FJv3jagcDn1LuJmLWBu4BFv29TJoKCS9Vo5835hVEMCU-tlhG-COW6MurS4L6W=s128-h128-e365">
   <script>
   // Google Analytics
@@ -118,15 +118,11 @@
     }
     
     aside {
-      text-transform: uppercase;
       font-size: .85em;
       letter-spacing: .09em;
       margin-top: 1em;
       color: #707065;
-    }
-    
-    aside em {
-      text-transform: none;
+      text-align: right;
     }
     
     #lfc-lyrics-content, #article-author {
@@ -377,22 +373,9 @@
     </section>
     
     <aside>
-      <span id="article-author" class="author vcard" i18n-values=".innerHTML:broughtToYou"> 
-        <em>brought to you by</em> 
-        <span class="fn">Lyrics for Chrome&#8482;</span> 
-        <em>via</em> LyricWiki&#8482;. 
+      <span id="article-author" class="author">
+        <g:plusone size="small" href="https://chrome.google.com/webstore/detail/oglbipcbkmlknhfhabolnniekmlhfoek" annotation="none"></g:plusone> <span i18n-content="plusOneThisPlease">this project!</span>
       </span>
-      <!-- Place this tag where you want the +1 button to render -->
-      <g:plusone size="small" href="https://chrome.google.com/webstore/detail/oglbipcbkmlknhfhabolnniekmlhfoek"></g:plusone>
-
-      <!-- Place this render call where appropriate -->
-      <script type="text/javascript">
-        (function() {
-          var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-          po.src = 'https://apis.google.com/js/plusone.js';
-          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-        })();
-      </script>
     </aside>
   </article>
   
@@ -425,6 +408,17 @@
       $body.removeClass(bodyClasses[currentIndex--]).addClass(bodyClasses[currentIndex]);
       return false;
     });
+  </script>
+  <script>
+    // Translate +1
+    window.___gcfg = {lang: chrome.i18n.getMessage('plusone_locale')};
+    
+    // Init +1
+    (function() {
+      var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+      po.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+    })();
   </script>
 </body> 
 </html>

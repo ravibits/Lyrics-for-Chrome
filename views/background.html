@@ -154,6 +154,16 @@
     
     chrome.extension.onRequest.addListener(function(request, sender, callback) {
       switch(request.action){
+        case 'openSettings':
+          chrome.tabs.create({
+            url: chrome.extension.getURL('views/settings.html'),
+            selected: true,
+            index: sender.tab.index+1
+          }, callback);
+        break;
+        case 'hideNewPopupNotification':
+          localStorage['showNewPopupNotification'] = 'false';
+        break;
         case 'newTabPageLoaded':
           
         break;
@@ -215,6 +225,14 @@
     // Check if is set whether the lyrics should show up on the page or in a new tab
     if(typeof localStorage['showLyricsType'] === 'undefined'){
       localStorage['showLyricsType'] = 'onPage';
+    }
+    
+    if(typeof localStorage['found'] === 'undefined'){
+      localStorage['found'] = '0';
+    }
+    
+    if(typeof localStorage['showNewPopupNotification'] === 'undefined'){
+      localStorage['showNewPopupNotification'] = 'true';
     }
   </script>
 </head>

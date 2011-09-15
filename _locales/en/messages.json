@@ -119,6 +119,16 @@
     "description": "Message in the header in the new tab page"
   },
   
+  "plusone_locale": {
+    "message": "en",
+    "description": "Google Plus One can be translated by providing the right locale"
+  },
+  
+  "plusOneThisPlease": {
+    "message": "this project!",
+    "description": "[+1] this proejct"
+  },
+  
   "changeLyrics": {
     "message": "Change lyrics",
     "description": "Message to change the current lyrics -- brings you to the search form"

@@ -22,7 +22,12 @@ LyricsPlugin.prototype.init = function(){
   this.setTitleFromPage();
   
   this.hasMaxHeight = true;
-  this.maxHeight = 426;
+  
+  if(this.newYouTube){
+    this.maxHeight = 313;
+  } else {
+    this.maxHeight = 426;
+  }
   
   lyricsHTML = [
     '<div id="ytl-outerwrapper" class="watch-module">',
@@ -110,9 +115,11 @@ LyricsPlugin.prototype.init = function(){
   // Add it to the side bar
   if(this.newYouTube){
     // New youtube
-    lyricsObject.addClass('newYouTube watch-panel-section');
+    $(document.body).addClass('newYouTube');
+    lyricsObject.addClass('watch-panel-section');
     this.elements.removeEl.attr('src', '//s.ytimg.com/yt/img/watch6-icon-close-vflZt2x4c.png');
-    $('.watch-sidecol:first').prepend(lyricsObject);
+    //$('.watch-sidecol:first').prepend(lyricsObject);
+    $('#watch-channel-brand-div').prepend(lyricsObject).find('#google_companion_ad_div').remove();
   } else {
     // Old youtube
     this.elements.removeEl.addClass('master-sprite img-php-close-button');
@@ -142,4 +149,20 @@ LyricsPlugin.prototype.init = function(){
     
     return false;
   });
+};
+
+LyricsPlugin.prototype.show = function(){
+  $('#watch-video').addClass('has-ad');
+  $('#watch-channel-brand-div').show().addClass('lfc-explicit-show');
+  this.getTitleFromPage();
+  this.elements.outerWrapper.show();
+  this.isVisible = true;
+};
+
+LyricsPlugin.prototype.hide = function(){
+  $('#watch-video').removeClass('has-ad');
+  $('#watch-channel-brand-div').hide().removeClass('lfc-explicit-show');
+  this.hideSections();
+  this.elements.outerWrapper.hide();
+  this.isVisible = false;
 };

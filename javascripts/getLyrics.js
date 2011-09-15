@@ -16,9 +16,7 @@ function getSongInfoFromRawHtml(data){
 }
 
 function getLyrics(title, callback) {
-  var startPos, 
-      endPos, 
-      lyrics,
+  var lyrics,
       url = 'http://google.com/search?sourceid=navclient&btnI=1&q=site%3Alyrics.wikia.com+' + encodeURIComponent(' -"Page Ranking Information" ' + title);
   
   $.ajax({
@@ -41,11 +39,15 @@ function getLyrics(title, callback) {
         // Send info to Google Analytics
         _gaq.push(['_trackEvent', 'Lyrics', 'Found']);
         
+        // Locally track number of songs found
+        localStorage['found'] = +localStorage['found']+1;
+        
         // Send lyrics back
         callback({
           success: true,
           lyrics: lyrics,
-          providerTitle: getSongInfoFromRawHtml(data)
+          providerTitle: getSongInfoFromRawHtml(data),
+          showNewPopupNotification: (+localStorage['found'] < 25 && localStorage['showNewPopupNotification'] === 'true' && localStorage['showLyricsType'] !== 'popup')
         });
       } catch(err) {
       

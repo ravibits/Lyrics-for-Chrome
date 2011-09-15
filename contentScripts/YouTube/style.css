@@ -35,19 +35,31 @@
 	height: 0;
 }
 
-#ytl-outerwrapper.newYouTube {
+.newYouTube #ytl-outerwrapper {
   padding: 10px;
   margin-bottom: 10px;
   background: #FFF;
   border-radius: 3px;
   -webkit-box-shadow: 0 1px 1px #888;
   box-sizing: border-box;
+  color: #333;
+  font-size: 12px;
+  text-align: left;
+  line-height: normal;
 }
 
-#page.watch .newYouTube h4 {
+.newYouTube #page.watch h4 {
   margin-bottom: 10px;
 }
 
 .newYouTube #ytl-remove-lyrics {
   margin: 2px 1px 0 0;
+}
+
+.newYouTube #page.watch6 #watch-channel-brand-div {
+  height: 362px;
+}
+
+.newYouTube #page.watch6 div#watch-channel-brand-div.lfc-explicit-show {
+  display: block !important;
 }
