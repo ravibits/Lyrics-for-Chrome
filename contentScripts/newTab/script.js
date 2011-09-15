@@ -55,17 +55,19 @@ LyricsPlugin.prototype.handleNewTitle = function(title){
   $('#lfc-title').text(this.currentLyrics.title);
 };
 
-var LP = new LyricsPlugin();
-LP.init();
+$(document).ready(function(){
+  var LP = new LyricsPlugin();
+  LP.init();
 
-chrome.extension.onRequest.addListener(function(request, sender, callback) {
-  switch(request.action){
-    case 'initNewTab':
-      LP.handleNewTitle(request.title);
-      LP.onPageActionClicked(request.onlyRequery);
-    break;
-    case 'showLyricsOnPage':
-      LP.onPageActionClicked(request.onlyRequery);
-    break;
-  }
+  chrome.extension.onRequest.addListener(function(request, sender, callback) {
+    switch(request.action){
+      case 'initNewTab':
+        LP.handleNewTitle(request.title);
+        LP.onPageActionClicked(request.onlyRequery);
+      break;
+      case 'showLyricsOnPage':
+        LP.onPageActionClicked(request.onlyRequery);
+      break;
+    }
+  });
 });

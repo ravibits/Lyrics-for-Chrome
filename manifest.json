@@ -1,7 +1,7 @@
 {
   "name": "__MSG_extName__",
   "description": "__MSG_extDescription__",
-  "version": "1.4",
+  "version": "1.4.1",
   "default_locale": "en",
   
   "background_page": "views/background.html",
@@ -105,9 +105,8 @@
   
   "permissions": [ 
     "tabs",
-    "http://google.com/search*",
-    "http://www.google.com/search*",
-    "http://www.youtube.com/watch*",
+    "*://google.com/search*",
+    "*://*.google.com/search*",
     "http://lyrics.wikia.com/*"
   ]
 }

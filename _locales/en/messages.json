@@ -69,6 +69,11 @@
     "description": "Option 2: open lyrics in a new tab page"
   },
   
+  "inPopup": {
+    "message": "Open it in a popup",
+    "description": "Option 3: open lyrics in a popup"
+  },
+  
   "ok": {
     "message": "OK",
     "description": "Confirm button"

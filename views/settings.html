@@ -147,6 +147,10 @@
               </div>
             </div>
           </div>
+          <div>
+            <input id="in-popup" name="lyricsType" type="radio" value="in-popup">
+            <label for="in-popup" i18n-content="inPopup">Open it in a popup</label>
+          </div>
         </div>
         <div class="action-area">
           <input id="show-lyrics-type-ok" type="submit" i18n-values="value:ok" value="OK">
@@ -161,11 +165,45 @@
   <script>
     i18n.process(document);
     
-    function toggle(){
-      if($('[name=lyricsType]:checked').prop('id') === 'current-tab'){
-        $('#new-tab-extra-options').slideUp();
+    /**
+     * If the display settings change, you might want to
+     * add or remove the popup for all tabs
+     */
+    function addOrRemovePopup(add){
+      var url = add ? 'contentScripts/Popup/popup.html' : '';
+      
+      // Get all windows
+      chrome.windows.getAll({populate: true}, function(windows){
+      
+        // Iterate over all windows
+        windows.forEach(function(win){
+        
+          // Iterate over each tab
+          win.tabs.forEach(function(tab){
+          
+            // Set or remove a popup
+            chrome.pageAction.setPopup({
+              tabId: tab.id,
+              popup: url
+            });
+          });
+        });
+      });
+    }
+    
+    function toggle(slide){
+      if($('[name=lyricsType]:checked').prop('id') === 'new-tab'){
+        if(slide){
+          $('#new-tab-extra-options').slideDown();
+        } else {
+          $('#new-tab-extra-options').show();
+        }
       } else {
-        $('#new-tab-extra-options').slideDown();
+        if(slide){
+          $('#new-tab-extra-options').slideUp();
+        } else {
+          $('#new-tab-extra-options').hide();
+        }
       }
     }
     
@@ -181,8 +219,11 @@
       $('#new-tab-normal').attr('checked', 'checked');
     }
     
-    $('[name=lyricsType]').change(toggle);
-    toggle();
+    $('[name=lyricsType]').change(function(){
+      toggle(true)
+    });
+    
+    toggle(false);
     
     $('#settings').submit(function(){
       
@@ -192,10 +233,19 @@
         return;
       }
       
-      if(selected.val() === 'current-tab'){
-        localStorage['showLyricsType'] = 'onPage';
-      } else {
-        localStorage['showLyricsType'] = 'newTab';
+      switch(selected.val()){
+        case 'current-tab':
+          localStorage['showLyricsType'] = 'onPage';
+          addOrRemovePopup(false);
+        break;
+        case 'new-tab':
+          localStorage['showLyricsType'] = 'newTab';
+          addOrRemovePopup(false);
+        break;
+        case 'in-popup':
+          localStorage['showLyricsType'] = 'popup';
+          addOrRemovePopup(true);
+        break;
       }
       
       selected = $('[name=pinned]:checked');
