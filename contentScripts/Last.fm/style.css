@@ -24,3 +24,31 @@
 #lfc-flash-description {
   padding: .5em 0;
 }
+
+.lfc-notification {
+  display: block;
+  margin-bottom: 1em;
+  background: #FFC;
+  padding: 1em;
+  border: 1px solid #DDA;
+  cursor: pointer;
+  line-height: 16px;
+  margin-right: 5px;
+}
+
+.lfc-notification-hide {
+  font-size: smaller;
+  color: #AA9;
+  float: right;
+  line-height: 16px;
+  padding: 0 4px;
+}
+
+.lfc-notification:hover {
+  background: #FFA;
+}
+
+.lfc-notification-hide:hover {
+  background: #BB7;
+  color: white;
+}

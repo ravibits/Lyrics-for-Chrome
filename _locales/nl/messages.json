@@ -162,5 +162,18 @@
   "omniboxHelp": {
     "message": "Zoek op <match>titel</match>, <match>artiest</match> of <match>regel uit de lyrics</match>",
     "description": "Text when 'lyrics' is typed in the omnibox"
+  },
+  
+  "tryThePopup": {
+    "message": "Probeer de nieuwe popup!",
+    "description": "Is shown above the lyrics in some cases"
+  },
+  
+  "hide": {
+    "message": "verberg"
+  },
+  
+  "new": {
+    "message": "nieuw!"
   }
 }

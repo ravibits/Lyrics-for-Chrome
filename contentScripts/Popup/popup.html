@@ -384,41 +384,47 @@
   <script src="../../javascripts/i18n.js"></script>
   <script src="script.js"></script>
   <script>
-    var bodyClasses = ['x-small', 'small', 'medium', 'large', 'x-large'], 
-        currentIndex = 2,
-        $body = $('body');
-    
     i18n.process(document);
     
-    $('#increase-text-size').click(function(){
-      if(currentIndex + 1 === bodyClasses.length){
-        return;
-      }
+    function init(){
+      var bodyClasses = ['x-small', 'small', 'medium', 'large', 'x-large'], 
+          currentIndex = 2,
+          $body = $('body');
       
-      $body.removeClass(bodyClasses[currentIndex++]).addClass(bodyClasses[currentIndex]);
       
-      return false;
-    });
+      $('#increase-text-size').click(function(){
+        if(currentIndex + 1 === bodyClasses.length){
+          return;
+        }
+        
+        $body.removeClass(bodyClasses[currentIndex++]).addClass(bodyClasses[currentIndex]);
+        
+        return false;
+      });
+      
+      $('#decrease-text-size').click(function(){
+        if(currentIndex === 0){
+          return;
+        }
+        
+        $body.removeClass(bodyClasses[currentIndex--]).addClass(bodyClasses[currentIndex]);
+        return false;
+      });
+      
+      // Translate +1
+      window.___gcfg = {lang: chrome.i18n.getMessage('plusone_locale')};
+      
+      // Init +1
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    }
     
-    $('#decrease-text-size').click(function(){
-      if(currentIndex === 0){
-        return;
-      }
-      
-      $body.removeClass(bodyClasses[currentIndex--]).addClass(bodyClasses[currentIndex]);
-      return false;
-    });
-  </script>
-  <script>
-    // Translate +1
-    window.___gcfg = {lang: chrome.i18n.getMessage('plusone_locale')};
-    
-    // Init +1
-    (function() {
-      var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-      po.src = 'https://apis.google.com/js/plusone.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-    })();
+    window.onload = function(){
+      setTimeout(init, 0);
+    };
   </script>
 </body> 
 </html>

@@ -54,3 +54,40 @@
 .minimized #lfc-minimize-lyrics:active {
   background-position: -14px -32px;
 }
+
+.lfc-notification {
+  display: block;
+  margin-bottom: 1em;
+  background: #FF9E53;
+  padding: .5em;
+  color: #FFF;
+  border: 1px solid #D4732E;
+  cursor: pointer;
+  line-height: 16px;
+}
+
+.lfc-notification-hide {
+  font-size: smaller;
+  float: right;
+  line-height: 16px;
+  padding: 0 4px;
+  background: #D4732E;
+  margin-top: 1ex;
+}
+
+.lfc-notification:hover {
+  background: #EB8437;
+}
+
+.lfc-notification-hide:hover {
+  background: transparent;
+}
+
+.lfc-notification:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+}

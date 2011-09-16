@@ -141,7 +141,15 @@ LyricsPlugin.prototype.lyricsCallback = function(data) {
   if (data.success) {
   
     if(data.showNewPopupNotification){
-      var notification = $('<span style="display: block; margin-bottom: 1em; background: #FFC; padding: 1em; border: 1px solid #DDA; cursor: pointer;">Try the new popup! <span style="font-size: smaller;color: #AA9;float: right;line-height: 16px;">Hide</span></span>');
+      var notification = $([
+        '<span class="lfc-notification">',
+          chrome.i18n.getMessage('tryThePopup'),
+          ' ',
+          '<span class="lfc-notification-hide">',
+          chrome.i18n.getMessage('hide'),
+          '</span>',
+        '</span>'
+      ].join(''));
       notification.click(function(){
         chrome.extension.sendRequest({
           'action': 'openSettings',

@@ -4,7 +4,7 @@
   overflow-y: auto;
   -webkit-transition: height .3s ease-out;
   height: auto;
-  padding: 5px 7px 4px 27px;
+  padding: 5px 7px 4px 8px;
 }
 
 #lfc-outerwrapper #lfc-innerwrapper p {
@@ -30,4 +30,30 @@
 
 #lfc-flash-description {
   padding: .5em 0;
+}
+.lfc-notification {
+  display: block;
+  margin-bottom: 1em;
+  background: #FFC;
+  padding: 1em;
+  border: 1px solid #DDA;
+  cursor: pointer;
+  line-height: 16px;
+}
+
+.lfc-notification-hide {
+  font-size: smaller;
+  color: #AA9;
+  float: right;
+  line-height: 16px;
+  padding: 0 4px;
+}
+
+.lfc-notification:hover {
+  background: #FFA;
+}
+
+.lfc-notification-hide:hover {
+  background: #BB7;
+  color: white;
 }

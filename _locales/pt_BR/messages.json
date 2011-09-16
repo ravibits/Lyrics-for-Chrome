@@ -157,5 +157,18 @@
   "omniboxHelp": {
     "message": "Procure pelo <match>nome da música</match>, <match>artista</match> ou uma <match>parte</match> da letra",
     "description": "Text when 'lyrics' is typed in the omnibox"
+  },
+  
+  "tryThePopup": {
+    "message": "Try the new popup!",
+    "description": "Is shown above the lyrics in some cases"
+  },
+  
+  "hide": {
+    "message": "hide"
+  },
+  
+  "new": {
+    "message": "new!"
   }
 }

@@ -34,7 +34,7 @@ LyricsPlugin.prototype.init = function(){
   
   this.elements.changeLyrics.click(function(){
     self.showSearchForm('searchTitle', 'searchHelp');
-    
+    self.elements.searchInput.select();
     return false;
   });
   

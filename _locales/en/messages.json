@@ -162,5 +162,18 @@
   "omniboxHelp": {
     "message": "Search for a <match>song title</match>, <match>artist</match> or <match>part</match> of the lyrics",
     "description": "Text when 'lyrics' is typed in the omnibox"
+  },
+  
+  "tryThePopup": {
+    "message": "Try the new popup!",
+    "description": "Is shown above the lyrics in some cases"
+  },
+  
+  "hide": {
+    "message": "hide"
+  },
+  
+  "new": {
+    "message": "new!"
   }
 }
