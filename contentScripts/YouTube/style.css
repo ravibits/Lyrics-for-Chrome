@@ -37,7 +37,7 @@
 
 .newYouTube #ytl-outerwrapper {
   padding: 10px;
-  margin-bottom: 10px;
+  margin: 0 0 10px 0;
   background: #FFF;
   border-radius: 3px;
   -webkit-box-shadow: 0 1px 1px #888;

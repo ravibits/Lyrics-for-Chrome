@@ -119,7 +119,12 @@ LyricsPlugin.prototype.init = function(){
     lyricsObject.addClass('watch-panel-section');
     this.elements.removeEl.attr('src', '//s.ytimg.com/yt/img/watch6-icon-close-vflZt2x4c.png');
     //$('.watch-sidecol:first').prepend(lyricsObject);
-    $('#watch-channel-brand-div').prepend(lyricsObject).find('#google_companion_ad_div').remove();
+    var watchChannelBrandDiv = $('#watch-channel-brand-div');
+    if(watchChannelBrandDiv.length === 0){
+      watchChannelBrandDiv = $('<div/>').addClass('watch-module').attr('id', 'watch-channel-brand-div');
+      $('#watch-video').append(watchChannelBrandDiv);
+    }
+    watchChannelBrandDiv.prepend(lyricsObject).find('#google_companion_ad_div').remove();
   } else {
     // Old youtube
     this.elements.removeEl.addClass('master-sprite img-php-close-button');
