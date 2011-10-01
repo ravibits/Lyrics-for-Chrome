@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿{
   "extName": {
     "message": "Lyrics for Google Chrome\u2122",
@@ -171,4 +172,166 @@
   "new": {
     "message": "new!"
   }
+=======
+﻿{
+  "extName": {
+    "message": "Lyrics for Google Chrome\u2122",
+    "description": "Title of the plugin"
+  },
+  
+  "extDescription": {
+    "message": "Veja as letras de quaisquer músicas no YouTube\u2122, Last.fm\u2122, Grooveshark\u2122 e Google Music\u2122, sem popups irritantes!",
+    "description": "Description of the plugin"
+  },
+  
+  "pageActionTitle": {
+    "message": "Encontrar letras",
+    "description": "Text in small popup when you hover the page action icon"
+  },
+  
+  "loadingMessage": {
+    "message": "Carregando a letra, aguarde um momento!",
+    "description": "Message when a lyrics is loading"
+  },
+  
+  "copyrightInfo": {
+    "message": "Lembre-se: as letras são propriedade de seus respectivos autores.",
+    "description": "First line of the copyright text after the lyrics"
+  },
+  
+  "copyrightCourtesy": {
+    "message": "Direitos autorais de <a href=\"http://lyrics.wikia.com\" title=\"LyricsWiki\">LyricWiki</a>",
+    "description": "Second line of the copyright with a link to LyricsWiki"
+  },
+  
+  "notFound": {
+    "message": "Nenhuma letra encontrada.",
+    "description": "Message shown when no lyrics was found"
+  },
+  
+  "notFoundHelp": {
+    "message": "Tente digitar o nome do <b>artista</b> e o <b>título</b> manualmente, e pressione Enter (return): ",
+    "description": "Show a hint when no lyrics were found"
+  },
+  
+  "searchHelp": {
+    "message": "Digite o nome do <b>artista</b> e o <b>título</b>, e pressione Enter (return): ",
+    "description": "Show a hint when searching for lyrics"
+  },
+  
+  "removeLyrics": {
+    "message": "Remover letra",
+    "description": "The remove from page text"
+  },
+  
+  "settingsTitle": {
+    "message": "Lyrics for Chrome",
+    "description": "Title of the settings page"
+  },
+  
+  "settingsLyrics": {
+    "message": "Como você deseja que sejam exibidas as letras?",
+    "description": "Option of settings page: lyrics display"
+  },
+  
+  "addToPage": {
+    "message": "Adicionar a própria página",
+    "description": "Option 1: add lyrics to the page"
+  },
+  
+  "openInNewTab": {
+    "message": "Abrí-la em uma nova aba",
+    "description": "Option 2: open lyrics in a new tab page"
+  },
+  
+  "ok": {
+    "message": "OK",
+    "description": "Confirm button"
+  },
+  
+  "cancel": {
+    "message": "Cancelar",
+    "description": "Cancel button"
+  },
+  
+  "underConstruction": {
+    "message": "Observação: Estas alterações não terão quaisquer efeitos agora. Esta parte do plugin ainda está em construção. Se você tiver alguma boa ideia sobre aperfeiçoamentos para este plugin, sinta-se livre para adicionar um comentário na Google Webstore. Obrigado!",
+    "description": "Under construction message in the options page."
+  },
+  
+  "textSize": {
+    "message": "Tamanho do texto",
+    "description": "Change text size, top of the new tab page"
+  },
+  
+  "openPinned": {
+    "message": "Criar uma aba fixada",
+    "description": "Do you want a pinned tab or a normal tab"
+  },
+  
+  "openNormal": {
+    "message": "Criar uma aba normal",
+    "description": "Do you want a pinned tab or a normal tab"
+  },
+  
+  "searchTitle": {
+    "message": "Procurar letras",
+    "description": "Search title"
+  },
+  
+  "find": {
+    "message": "Procurar",
+    "description": "Button text for the search button"
+  },
+  
+  "broughtToYou": {
+    "message": "<em>trazido a você por</em> Lyrics for Chrome&#8482; <em>via</em> LyricWiki&#8482;.",
+    "description": "Message in the header in the new tab page"
+  },
+  
+  "plusone_locale": {
+    "message": "pt-BR",
+    "description": "Google Plus One can be translated by providing the right locale"
+  },
+  
+  "plusOneThisPlease": {
+    "message": "este projeto!",
+    "description": "[+1] this proejct"
+  },
+  
+  "changeLyrics": {
+    "message": "Alterar para outra letra",
+    "description": "Message to change the current lyrics -- brings you to the search form"
+  },
+  
+  "refreshLyrics": {
+    "message": "Recarregar",
+    "description": "Message to refresh the lyrics"
+  },
+  
+  "minimizeLyrics": {
+    "message": "Deslizar para cima/baixo",
+    "description": "Message to slide up or slide down the lyrics"
+  },
+  
+  "largerText": {
+    "message": "Maior tamanho do texto",
+    "description": "Title attribute for larger text size"
+  },
+  
+  "smallerText": {
+    "message": "Menor tamanho do texto",
+    "description": "Title attribute for smaller text size"
+  },
+  
+  "settingsSaved": {
+    "message": "As configurações foram salvas!",
+    "description": "Alert message when saving settings"
+  },
+  
+  "omniboxHelp": {
+    "message": "Procure pelo <match>nome da música</match>, <match>artista</match> ou uma <match>parte</match> da letra",
+    "description": "Text when 'lyrics' is typed in the omnibox"
+  }
+>>>>>>> 608a56d3c9dc80ffea51babab0584b13d398a292
 }
